@@ -323,17 +323,17 @@ header.shadow {
   font-size: 54px;
   color: var(--main-color);
 }
-.interests-box:hover .bx {
+/* .interests-box:hover .bx {
   color: #055105;
-}
+} */
 .interests-box a {
   color: var(--main-color);
   font-size: var(--p-font);
   font-weight: 500;
-}
+/* }
 .interests-box:hover a {
   color: #c8c8c9;
-}
+} */
 .project-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, auto));
