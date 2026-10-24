@@ -292,6 +292,8 @@ body::before {
 .project-body p { color: var(--muted); font-size: 0.94rem; }
 .project-link { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; color: var(--accent); }
 .project-link:hover { text-decoration: underline; }
+.project-links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.project-links .project-link { margin-top: 0; }
 
 .mini-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .mini { display: flex; flex-direction: column; gap: 8px; padding: 18px; border: 1px solid var(--border); border-radius: 14px; background: var(--panel); }
