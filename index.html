@@ -1,312 +1,534 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kushal Rana · AI Engineer · Generative AI, Agentic Systems &amp; ML</title>
+  <meta name="description" content="Kushal Rana is an AI engineer (SDE II at Aviara Labs) who builds production generative AI: agentic RAG, LLM orchestration, LLMOps and ML pipelines, from architecture to deployment." />
+  <meta name="author" content="Kushal Rana" />
+  <meta name="theme-color" content="#0b0d12" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)" />
+  <link rel="canonical" href="https://kushalranaai.github.io/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kushalranaai.github.io/" />
+  <meta property="og:title" content="Kushal Rana · AI Engineer" />
+  <meta property="og:description" content="Production generative AI, agentic systems, LLMOps and machine learning, from architecture to deployment." />
+  <meta property="og:image" content="https://kushalranaai.github.io/assets/img/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:creator" content="@KushalranaAI" />
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="assets/site.webmanifest" />
-  <title>Kushal Rana's Portfolio Website</title>
-  <!-- Link To CSS -->
-  <link rel="stylesheet" href="./css/style.css" />
-  <!-- Box Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+
+  <!-- Applies the saved theme before first paint, so there's no flash. -->
+  <script>
+    try {
+      const saved = localStorage.getItem("theme");
+      const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+      document.documentElement.dataset.theme = saved || (prefersLight ? "light" : "dark");
+    } catch (e) {}
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kushal Rana",
+    "jobTitle": "AI Engineer (Software Development Engineer II)",
+    "worksFor": { "@type": "Organization", "name": "Aviara Labs" },
+    "alumniOf": "I.K. Gujral Punjab Technical University",
+    "url": "https://kushalranaai.github.io/",
+    "email": "mailto:kushalrana448@gmail.com",
+    "sameAs": ["https://github.com/KushalranaAI", "https://www.linkedin.com/in/kushal-rana", "https://x.com/KushalranaAI", "https://kushalrana448.medium.com/", "https://www.youtube.com/@naaku-o2x"],
+    "knowsAbout": ["Generative AI", "Agentic AI", "Retrieval-Augmented Generation", "Model Context Protocol", "Machine Learning", "Deep Learning", "LLMOps", "FastAPI", "System Design"]
+  }
+  </script>
 </head>
 
 <body>
-  <!-- Navbar -->
-  <header>
-    <a href="#" class="logo">Kushal Rana.</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="bx bx-menu" id="menu-icon"></div>
+  <!-- Icons used across the page -->
+  <svg width="0" height="0" class="sprite" aria-hidden="true">
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23Zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64Z"/></symbol>
+    <symbol id="i-medium" viewBox="0 0 24 24"><path fill="currentColor" d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12Zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42ZM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75c.66 0 1.19 2.58 1.19 5.75Z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12c0 1.95.17 3.9.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14c.33-1.91.5-3.86.5-5.81 0-1.95-.17-3.9-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Zm0 .5 9 6 9-6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6m0-6-9 9M18 14v4.5A1.5 1.5 0 0 1 16.5 20h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="9" r="5.5"/><path d="m8.5 13.5-1.5 7 5-2.5 5 2.5-1.5-7"/></g></symbol>
+  </svg>
 
-    <ul class="navbar">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#project">Project</a></li>
-      <li><a href="#interests">Interests</a></li>
-      <li><a href="#footer">Contact</a></li>
-      <div class="bx bx-moon" id="darkmode"></div>
-    </ul>
+  <!-- ============ Header ============ -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="#top" aria-label="Kushal Rana, back to top"><span class="brand-mark">KR</span><span class="brand-name">Kushal Rana</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#open-source">Open source</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch colour theme">
+          <svg class="i show-dark"><use href="#i-sun" /></svg><svg class="i show-light"><use href="#i-moon" /></svg>
+        </button>
+        <a class="btn btn-small" href="Kushal_Rana_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <svg class="i"><use href="#i-menu" /></svg>
+        </button>
+      </div>
+    </nav>
   </header>
-  <!-- Home -->
-  <section class="home" id="home">
-    <div class="home-img">
-      <img src="assets/Kushal2.JPG" alt="" />
-    </div>
-    <div class="home-text">
-      <span>Hey! I'm</span>
-      <h1>Kushal Rana.</h1>
-      <br />
-      <h2>AI/Machine Learning Engineer | Data Science | Python developer</h2>
-      <a href="Kushalrana_2024F.pdf" download id="download-button" class="btn">Download My Resume</a>
-      <div class="social_alignment">
-        <div class="social">
-          <a href="https://www.linkedin.com/in/kushal-rana/"><i class="bx bxl-linkedin"></i></a>
-          <a href="https://github.com/kushalranaAI"><i class="bx bxl-github"></i></a>
-          <a href="https://www.instagram.com//lovely_way_to_life/"><i class="bx bxl-instagram"></i></a>
-          <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=kushalrana448@gmail.com"><i
-              class="bx bxl-gmail"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <hr />
-  <!-- About -->
-  <section class="about" id="about">
-    <div class="heading">
-      <h2>About Me</h2>
-      <span>Introduction</span>
-    </div>
-    <!-- About Content -->
-    <div class="about-container">
-      <div class="about-img">
-        <img src="assets/about.png" alt="" />
-      </div>
-      <div class="about-text">
-        <p>
-          As a dedicated and ambitious Computer Science and Engineering student, I have a strong passion for learning
-          and am
-          constantly seeking new opportunities to expand my knowledge and skills. With a background in mathematics and
-          computer
-          science, I am passionate about expanding my knowledge in AI, data science, and associated technologies like
-          machine
-          learning, deep learning, and data visualization. Additionally, I am keenly interested in understanding how
-          APIs
-          facilitate the seamless integration of applications. I am passionate about using my skills to help
-          organizations make
-          data-driven decisions and improve their operations. I am also open to collaborating and seeking opportunities
-          to apply
-          my skills to real-world projects.
+
+  <main id="main">
+    <!-- ============ Hero ============ -->
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <p class="status"><span class="pulse" aria-hidden="true"></span>SDE II at Aviara Labs · Noida, India</p>
+        <h1 id="hero-title">I build <span class="grad">production AI systems</span>: agents, RAG and ML that ship.</h1>
+        <p class="lead">
+          I'm <strong>Kushal Rana</strong>, an AI and backend engineer. I own AI systems end to end, from architecture and
+          data to models, APIs and production: an ML revenue platform running in ~70 hotels, enterprise agentic RAG,
+          and LLM observability for the teams that run it.
         </p>
-        <div class="education">
-          <h3>My Education :</h3>
-          <br />
-          <h4>I.K. Gujral Punjab Technical University, Mohali Campus-1</h4>
-          <div>
-            <ul>
-              <li>&nbsp • Bachelor of Technology (2020-2024)</li>
-              <li>&nbsp • Computer Science & Engineering</li>
-            </ul>
-          </div>
-          <br />
-          <h4>Govt. Boys Senior Secondary School, Shahdara (2016-2018)</h4>
-          <div>
-            <ul>
-              <li>&nbsp • XIIth (CBSE Board)</li>
-            </ul>
-          </div>
-
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#work">See my work <svg class="i"><use href="#i-arrow" /></svg></a>
+          <a class="btn" href="Kushal_Rana_Resume.pdf" download><svg class="i"><use href="#i-download" /></svg> Download résumé</a>
         </div>
+        <ul class="social" aria-label="Profiles">
+          <li><a href="https://github.com/KushalranaAI" target="_blank" rel="noopener" aria-label="GitHub"><svg class="i"><use href="#i-github" /></svg></a></li>
+          <li><a href="https://www.linkedin.com/in/kushal-rana" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="i"><use href="#i-linkedin" /></svg></a></li>
+          <li><a href="https://x.com/KushalranaAI" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg class="i"><use href="#i-x" /></svg></a></li>
+          <li><a href="https://kushalrana448.medium.com/" target="_blank" rel="noopener" aria-label="Medium blog"><svg class="i"><use href="#i-medium" /></svg></a></li>
+          <li><a href="https://www.youtube.com/@naaku-o2x" target="_blank" rel="noopener" aria-label="YouTube channel"><svg class="i"><use href="#i-youtube" /></svg></a></li>
+          <li><a href="mailto:kushalrana448@gmail.com" aria-label="Email"><svg class="i"><use href="#i-mail" /></svg></a></li>
+        </ul>
       </div>
-    </div>
-  </section>
-  <hr />
-  <!-- Skills -->
-  <section class="skills" id="skills">
-    <div class="heading">
-      <h2>Skills</h2>
-      <span>My Skills</span>
-    </div>
-    <!-- Skills Content -->
-    <div class="skills-container">
-      <div class="bars">
-        <!-- Box 1 -->
-        <div class="bars-box">
-          <h3>HTML</h3>
-          <span>65%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar html-bar"></div>
+      <div class="hero-visual">
+        <div class="portrait">
+          <img src="assets/img/kushal.webp" width="360" height="360" alt="Portrait of Kushal Rana" fetchpriority="high" />
         </div>
-
-        <!-- Box 2 -->
-        <div class="bars-box">
-          <h3>CSS</h3>
-          <span>80%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar css-bar"></div>
-        </div>
-
-        <!-- Box 3 -->
-        <div class="bars-box">
-          <h3>Python</h3>
-          <span>95%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar python-bar"></div>
-        </div>
-
-        <!-- Box 4 -->
-        <div class="bars-box">
-          <h3>Machine Learning</h3>
-          <span>78%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar ml-bar"></div>
-        </div>
-
-        <!-- Box 5 -->
-        <div class="bars-box">
-          <h3>Artificial Intelligence</h3>
-          <span>62%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar ai-bar"></div>
-        </div>
-
-        <!-- Box 6 -->
-        <div class="bars-box">
-          <h3>Data Science</h3>
-          <span>86%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar ds-bar"></div>
-        </div>
-
-        <!-- Box 7 -->
-        <div class="bars-box">
-          <h3>API Development</h3>
-          <span>70%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar ds-bar"></div>
-        </div>
-
-        <!-- Box 8 -->
-        <div class="bars-box">
-          <h3>Data structure and Algorithm</h3>
-          <span>85%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar ds-bar"></div>
-        </div>
-
-        <!-- Box 9 -->
-        <div class="bars-box">
-          <h3>Programing language (C++, Python)</h3>
-          <span>80%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar ds-bar"></div>
-        </div>
-
-        <!-- Box 10 -->
-        <div class="bars-box">
-          <h3>Object Oriented Programming</h3>
-          <span>76%</span>
-          <div class="light-bar"></div>
-          <div class="percent-bar ds-bar"></div>
-        </div>
-
+        <div class="float-card fc-1" aria-hidden="true"><span class="dot ok"></span>agent.run(tools=[search, sql, crm])</div>
+        <div class="float-card fc-2" aria-hidden="true"><span class="dot violet"></span>trace · 14 spans · 1.8s</div>
       </div>
-      <div class="skills-img">
-        <img src="assets/skills.png" alt="" />
-      </div>
-    </div>
-  </section>
-  <hr />
-  <!-- project -->
-  <section class="project" id="project">
-    <div class="heading">
-      <h2>Projects</h2>
-      <span>Some of my Projects & Contributions</span>
-    </div>
-    <div class="project-content">
-      <div class="project-img">
-        <img src="assets/project 1 photo.png" alt="https://github.com/KushalranaAI/barter_recom" />
-        <a href="" class="project-btn">Barter| End-End recommendation system</a>
-      </div>
+    </section>
 
-      <!-- <div class="project-content"> -->
-        <div class="project-img">
-          <img src="assets/project 2 photo.jpg" alt="https://github.com/KushalranaAI/Data-Analysis-projects" />
-          <a href="" class="project-btn">Health App Analysis</a>
+    <!-- Impact numbers -->
+    <section class="container" aria-label="Highlights">
+      <ul class="stats">
+        <li><b>~70</b><span>hotels running my ML pricing platform, scaling toward 200</span></li>
+        <li><b>3</b><span>production AI platforms architected at Aviara Labs</span></li>
+        <li><b>18 mo</b><span>of hotel data behind the pricing models</span></li>
+        <li><b>5</b><span>open-source learning platforms on RAG, ML, systems and Python</span></li>
+      </ul>
+    </section>
+
+    <!-- ============ Selected work ============ -->
+    <section class="section container" id="work" aria-labelledby="work-title">
+      <header class="section-head">
+        <p class="eyebrow">Selected work</p>
+        <h2 id="work-title">Production systems I architected</h2>
+        <p class="section-lead">Built at Aviara Labs. The code is private, so here's the problem, what I built and what it
+          does today.</p>
+      </header>
+
+      <!-- Case study: RMS -->
+      <article class="case reveal">
+        <div class="case-body">
+          <p class="case-tag"><span>Machine learning</span><span>SaaS</span><span>2026</span></p>
+          <h3>AI-powered Revenue Management System</h3>
+          <p class="case-summary">Hotels set room prices by hand from spreadsheets and instinct. I led the architecture of a
+            platform that prices rooms with ML instead, and it now runs across ~70 hotels in Malaysia.</p>
+          <dl class="case-points">
+            <div><dt>Problem</dt><dd>Pricing has to react to demand, competitors and business rules, for every property, every day.</dd></div>
+            <div><dt>What I built</dt><dd>End-to-end ML pipelines on ~18 months of historical data (ingestion, features,
+              training, evaluation, prediction, continuous improvement), served through backend services and REST APIs
+              straight into revenue workflows.</dd></div>
+            <div><dt>Result</dt><dd>A multi-tenant, multi-property SaaS deployed across <b>~70 hotels</b>, with expansion
+              planned toward <b>200 properties</b>.</dd></div>
+          </dl>
+          <ul class="chips"><li>Python</li><li>ML pipelines</li><li>Feature engineering</li><li>FastAPI</li><li>PostgreSQL</li><li>Multi-tenant SaaS</li><li>Azure</li></ul>
         </div>
-
-        <!-- <div class="project-content"> -->
-          <div class="project-img">
-            <img src="assets/project 3 photo.jpg"
-              alt="https://github.com/KushalranaAI/Machine-learning-/blob/main/Project_5(House_price_prediction).ipynb" />
-            <a href="" class="project-btn">House Price Prediction</a>
-          </div>
-
-          <!-- <div class="project-content"> -->
-            <div class="project-img">
-              <img src="assets/project 4 photo.jpg" alt="https://github.com/KushalranaAI/Machine-learning-" />
-              <a href="" class="project-btn">More machine learning Projects</a>
+        <figure class="case-visual" aria-label="Architecture of the revenue management system">
+          <div class="diagram">
+            <div class="d-row d-grid2">
+              <span class="d-node">Hotel history<small>18 months</small></span>
+              <span class="d-node">Demand signals</span>
+              <span class="d-node">Competitor rates</span>
+              <span class="d-node">Business rules</span>
             </div>
-
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-node d-wide accent">Feature pipeline → model training → evaluation</div>
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-node d-wide accent-2">Pricing intelligence API<small>per tenant · per property</small></div>
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-row">
+              <span class="d-node">Revenue workflows</span>
+              <span class="d-node ok">~70 hotels live</span>
+            </div>
           </div>
-  </section>
-  <hr />
-  <!-- interests -->
-  <section class="interests" id="interests">
-    <div class="heading">
-      <h2>Interests</h2>
-      <span>My Interests/Experties</span>
-    </div>
-    <div class="interests-content">
-      <!-- Box 1 -->
-      <div class="interests-box">
-        <i class="bx bx-code-alt"></i>
-        <h3>Competitive Programming</h3>
-        <a href="">Explore More</a>
-      </div>
-      <!-- Box 2 -->
-      <div class="interests-box">
-        <i class="bx bxl-react"></i>
-        <h3>Machine learning </h3>
-        <a href="">Explore More</a>
-      </div>
-      <!-- Box 3 -->
-      <div class="interests-box">
-        <i class="bx bx-color-fill"></i>
-        <h3>UI/UX Design</h3>
-        <a href="">Explore More</a>
+          <figcaption>Data → models → API → daily pricing decisions</figcaption>
+        </figure>
+      </article>
+
+      <!-- Case study: COVA -->
+      <article class="case case-flip reveal">
+        <div class="case-body">
+          <p class="case-tag"><span>Agentic AI</span><span>RAG</span><span>Enterprise</span></p>
+          <h3>COVA: enterprise agentic AI infrastructure</h3>
+          <p class="case-summary">The generative AI layer behind Aviara Connect. Agents answer questions and act across
+            contracts, purchase orders, invoices, obligations, renewals, partners and documents.</p>
+          <dl class="case-points">
+            <div><dt>Problem</dt><dd>Business answers live in both structured records and unstructured documents, and each
+              user may only see their own tenant's data.</dd></div>
+            <div><dt>What I built</dt><dd>Production RAG and agent workflows: semantic and vector retrieval, structured
+              database retrieval, hybrid search, tool calling, specialised agents, conversation context and enterprise memory.</dd></div>
+            <div><dt>Result</dt><dd>Agents reason across records and documents while staying inside <b>tenant isolation</b>
+              and <b>permission-aware</b> access boundaries.</dd></div>
+          </dl>
+          <ul class="chips"><li>LangChain</li><li>LlamaIndex</li><li>Hybrid search</li><li>Tool calling</li><li>FastAPI</li><li>Django</li><li>PostgreSQL</li><li>MongoDB</li><li>Redis</li><li>Docker</li><li>Azure</li></ul>
+        </div>
+        <figure class="case-visual" aria-label="Architecture of the COVA agent layer">
+          <div class="diagram">
+            <div class="d-node d-wide">User question<small>"Which contracts renew next month, and what do they owe?"</small></div>
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-node d-wide accent">Orchestrator agent · memory · conversation context</div>
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-row">
+              <span class="d-node">Contracts agent</span>
+              <span class="d-node">Finance agent</span>
+              <span class="d-node">Documents agent</span>
+            </div>
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-boundary">
+              <span class="d-boundary-label">permission-aware · tenant-isolated</span>
+              <div class="d-row">
+                <span class="d-node accent-2">Vector + hybrid search</span>
+                <span class="d-node accent-2">SQL / Mongo tools</span>
+                <span class="d-node accent-2">Enterprise memory</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Agents route to tools over structured and unstructured data</figcaption>
+        </figure>
+      </article>
+
+      <!-- Case study: Aviara Eye -->
+      <article class="case reveal">
+        <div class="case-body">
+          <p class="case-tag"><span>LLMOps</span><span>Observability</span></p>
+          <h3>Aviara Eye: LLMOps and AI observability</h3>
+          <p class="case-summary">When an agent gives a wrong answer, you need to see why. I set up centralised tracing and
+            prompt management for every production generative AI app.</p>
+          <dl class="case-points">
+            <div><dt>Problem</dt><dd>Agent failures were black boxes, and prompts were scattered across services.</dd></div>
+            <div><dt>What I built</dt><dd>A self-hosted Langfuse deployment, instrumenting LLM calls, prompts, tool executions,
+              agent workflows and full execution traces.</dd></div>
+            <div><dt>Result</dt><dd>Engineering teams debug failures, inspect agent behaviour, manage prompts centrally and
+              monitor production AI from one place.</dd></div>
+          </dl>
+          <ul class="chips"><li>Langfuse</li><li>LLM tracing</li><li>Prompt management</li><li>Agent observability</li><li>LLM evaluation</li><li>Docker</li></ul>
+        </div>
+        <figure class="case-visual" aria-label="A sample agent trace">
+          <div class="trace">
+            <div class="trace-head"><span>trace · contract-renewals</span><span>1.84 s</span></div>
+            <div class="span" style="--d:0;--w:100%"><b>agent.run</b></div>
+            <div class="span" style="--d:2%;--w:18%"><b>llm.plan</b></div>
+            <div class="span tool" style="--d:21%;--w:22%"><b>tool.sql_query</b></div>
+            <div class="span tool" style="--d:21%;--w:30%"><b>tool.hybrid_search</b></div>
+            <div class="span" style="--d:53%;--w:12%"><b>rerank</b></div>
+            <div class="span" style="--d:66%;--w:32%"><b>llm.answer</b></div>
+            <div class="trace-foot"><span>prompt v14</span><span>tokens 3,912</span><span class="okc">eval: grounded ✓</span></div>
+          </div>
+          <figcaption>An illustrative trace: every step of an agent run, timed and inspectable</figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <!-- ============ Experience ============ -->
+    <section class="section container" id="experience" aria-labelledby="exp-title">
+      <header class="section-head">
+        <p class="eyebrow">Experience</p>
+        <h2 id="exp-title">Where I've worked</h2>
+      </header>
+      <ol class="timeline">
+        <li class="reveal">
+          <div class="tl-meta"><span class="tl-date">Apr 2026 – Present</span><span class="tl-place"><svg class="i"><use href="#i-pin" /></svg>Noida</span></div>
+          <div class="tl-body">
+            <h3>Software Development Engineer II · <span>Aviara Labs</span></h3>
+            <p>I own AI architecture across the company's platforms: the ML revenue management system, the COVA agentic AI
+              layer and the Aviara Eye observability stack.</p>
+            <ul>
+              <li>Led the architecture of a multi-tenant hotel revenue platform, now live in ~70 hotels.</li>
+              <li>Architected production RAG and multi-agent workflows with tenant isolation and permission-aware retrieval.</li>
+              <li>Established LLM tracing and prompt management across all generative AI apps.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="tl-meta"><span class="tl-date">Aug 2024 – Apr 2026</span><span class="tl-place"><svg class="i"><use href="#i-pin" /></svg>Noida</span></div>
+          <div class="tl-body">
+            <h3>Software Development Engineer I · <span>Aviara Labs</span></h3>
+            <p>Grew from implementing features to owning AI components, backend systems and production architecture.</p>
+            <ul>
+              <li>Shipped ML and deep learning models, document processing, retrieval and generative AI features.</li>
+              <li>Built backend services, data pipelines, database schemas and APIs used across production platforms.</li>
+              <li>Made development reproducible with Docker, Git, Azure, MLflow, DVC and CI/CD.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="reveal">
+          <div class="tl-meta"><span class="tl-date">Jan 2024 – Jul 2024</span><span class="tl-place"><svg class="i"><use href="#i-pin" /></svg>Kerala (remote)</span></div>
+          <div class="tl-body">
+            <h3>Associate AI Developer · <span>Rapid Autobots</span></h3>
+            <p>Built an AI conversational platform for a drop-shipping e-commerce business.</p>
+            <ul>
+              <li>Contextual AI workflows over product, order, store and customer data using OpenAI, LangChain and FastAPI.</li>
+              <li>Backend integrations, automated reporting and Excel exports, containerised with Docker.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ Open source ============ -->
+    <section class="section container" id="open-source" aria-labelledby="os-title">
+      <header class="section-head">
+        <p class="eyebrow">Open source</p>
+        <h2 id="os-title">Things I've built in public</h2>
+        <p class="section-lead">Complete, runnable learning platforms. I build them to go deep on a topic, and to help other
+          engineers do the same.</p>
+      </header>
+
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="filter active" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" data-filter="genai" aria-pressed="false">GenAI &amp; agents</button>
+        <button class="filter" data-filter="ml" aria-pressed="false">ML &amp; CV</button>
+        <button class="filter" data-filter="systems" aria-pressed="false">Backend &amp; systems</button>
+        <button class="filter" data-filter="learn" aria-pressed="false">Learning platforms</button>
       </div>
 
-      <!-- Box 4 -->
-      <div class="interests-box">
-        <i class="bx bx-mobile-alt"></i>
-        <h3>Data Science</h3>
-        <a href="d">Explore More</a>
-      </div>
-      <!-- Box 5 -->
-      <div class="interests-box">
-        <i class="bx bx-cricket-ball"></i>
-        <h3>Sketching</h3>
-        <a href="#">Explore More</a>
-      </div>
-      <!-- Box 6 -->
-      <div class="interests-box">
-        <i class="bx bx-camera"></i>
-        <h3>Photography</h3>
-        <a href="#">Explore More</a>
+      <div class="project-grid" id="project-grid">
+        <!-- RAG tutorials (no UI: show the pipeline) -->
+        <article class="project featured reveal" data-tags="genai learn">
+          <div class="project-media media-diagram" aria-hidden="true">
+            <div class="mini-flow">
+              <span>Docs</span><i></i><span>Chunk</span><i></i><span>Embed</span><i></i><span class="hl">Hybrid + rerank</span><i></i><span class="hl2">Agents · MCP</span>
+            </div>
+            <div class="mini-code">
+              <span class="c">$</span> claude mcp add nimbus-docs -- python mcp_servers/docs_server.py<br />
+              <span class="c">✓</span> 30 days · 15 projects · offline test suite
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>All-in-One RAG Tutorials</h3>
+            <p>A 30-day course from your first embedding to multi-agent systems on MCP: hybrid search, reranking,
+              contextual retrieval, evaluation, agentic and corrective RAG, Graph RAG, guardrails and deployment. It ends
+              with 15 portfolio projects.</p>
+            <ul class="chips small"><li>Claude API</li><li>MCP</li><li>Multi-agent</li><li>Hybrid search</li><li>FastAPI</li></ul>
+            <a class="project-link" href="https://github.com/KushalranaAI/All-in-One-RAG_tutorials" target="_blank" rel="noopener"><svg class="i"><use href="#i-github" /></svg> View repository</a>
+          </div>
+        </article>
+
+        <article class="project reveal" data-tags="systems learn">
+          <div class="project-media"><img src="assets/img/projects/system-learn.webp" width="1200" height="750" loading="lazy" alt="System Learn home page with a live load-balancer diagram" /></div>
+          <div class="project-body">
+            <h3>System Learn</h3>
+            <p>Learn system design by building it. Wire load balancers, caches, queues and databases on a canvas, push
+              traffic, break things on purpose and watch p99 latency and cost react. Includes 19 modules, 129 lessons, 21
+              in-browser simulations and an optional AI tutor.</p>
+            <ul class="chips small"><li>TypeScript</li><li>React</li><li>Simulation</li><li>Kafka · Raft · sagas</li></ul>
+            <a class="project-link" href="https://github.com/KushalranaAI/system_learn" target="_blank" rel="noopener"><svg class="i"><use href="#i-github" /></svg> View repository</a>
+          </div>
+        </article>
+
+        <article class="project reveal" data-tags="ml learn">
+          <div class="project-media"><img src="assets/img/projects/ml-1-to-100.webp" width="1200" height="750" loading="lazy" alt="Machine Learning 1 to 100 interactive lab showing a matrix transformation" /></div>
+          <div class="project-body">
+            <h3>Machine Learning 1 → 100</h3>
+            <p>All of classical ML, derived from the maths and implemented from scratch: 58 lessons, a NumPy library tested
+              against scikit-learn, a C++17 port, 16 interactive visualisers and 5 projects on real data (CNN reaching 98.4%
+              on MNIST).</p>
+            <ul class="chips small"><li>NumPy</li><li>C++17</li><li>Next.js</li><li>From scratch</li></ul>
+            <a class="project-link" href="https://github.com/KushalranaAI/machine-learning-1-to-100" target="_blank" rel="noopener"><svg class="i"><use href="#i-github" /></svg> View repository</a>
+          </div>
+        </article>
+
+        <article class="project reveal" data-tags="systems learn">
+          <div class="project-media"><img src="assets/img/projects/python-projects.webp" width="1200" height="750" loading="lazy" alt="Python Projects learning hub home page" /></div>
+          <div class="project-body">
+            <h3>Python Projects</h3>
+            <p>20 end-to-end projects, from a guessing game to an interpreter, a search engine and an online shop. Each is
+              built with clean, object-oriented Python, has its own Flask UI and test suite, and comes with a step-by-step
+              build guide.</p>
+            <ul class="chips small"><li>Python</li><li>OOP</li><li>Flask</li><li>pytest</li></ul>
+            <a class="project-link" href="https://github.com/KushalranaAI/Python-Projects" target="_blank" rel="noopener"><svg class="i"><use href="#i-github" /></svg> View repository</a>
+          </div>
+        </article>
+
+        <article class="project reveal" data-tags="learn">
+          <div class="project-media"><img src="assets/img/projects/oop.webp" width="1200" height="750" loading="lazy" alt="OOP course showing a step-through memory trace of object creation" /></div>
+          <div class="project-body">
+            <h3>OOP in Python, C++ &amp; JavaScript</h3>
+            <p>An interactive course showing how objects really work in three languages: step-through memory traces, a
+              method-lookup explorer (MRO, vtables, prototype chains) and 5 projects with identical output in every language.</p>
+            <ul class="chips small"><li>Python</li><li>C++20</li><li>JavaScript</li><li>Flask</li></ul>
+            <a class="project-link" href="https://github.com/KushalranaAI/OOP-in-Python" target="_blank" rel="noopener"><svg class="i"><use href="#i-github" /></svg> View repository</a>
+          </div>
+        </article>
       </div>
 
-      <!-- Box 8 -->
-      <div class="interests-box">
-        <i class="bx bx-dumbbell"></i>
-        <h3>Fitness</h3>
-        <a href="#">Explore More</a>
-      </div>
-    </div>
-  </section>
-  <!-- <hr /> -->
-  <!-- Footer -->
-  <div class="footer" id="footer">
-    <h2>Contact Me</h2>
-    <div class="footer-social">
-      <a href="https://www.linkedin.com/in/kushal-rana/"><i class="bx bxl-linkedin"></i></a>
-      <a href="https://github.com/kushalranaAI"><i class="bx bxl-github"></i></a>
-      <a href="https://www.instagram.com/lovely_way_to_life/"><i class="bx bxl-instagram"></i></a>
-      <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=kushalrana448@gmail.com"><i class="bx bxl-gmail"></i></a>
-    </div>
-  </div>
-  <!-- Copyright -->
-  <div class="copyright">
-    <p>Copyright © <a href="">Kushal Rana</a> | All Right Reserved.</p>
-  </div>
+      <h3 class="subhead">Earlier projects</h3>
+      <ul class="mini-grid" id="earlier-grid">
+        <li class="mini reveal" data-tags="genai systems">
+          <h4>KynAI: data analyst agent</h4>
+          <p>Upload a dataset and ask questions. A LangChain ReAct agent with a Python tool cleans the data, analyses it and
+            draws charts, all behind a FastAPI service.</p>
+          <p class="mini-meta">LangChain · OpenAI · FastAPI · Docker</p>
+          <a href="https://github.com/KushalranaAI/KynAI" target="_blank" rel="noopener">Repository <svg class="i"><use href="#i-external" /></svg></a>
+        </li>
+        <li class="mini reveal" data-tags="ml">
+          <h4>Kidney disease classification</h4>
+          <p>A VGG16 transfer-learning CT-scan classifier with a modular pipeline, MLflow experiment tracking and DVC stages.</p>
+          <p class="mini-meta">TensorFlow · MLflow · DVC · Docker</p>
+          <a href="https://github.com/KushalranaAI/Kidney-Disease-Classification" target="_blank" rel="noopener">Repository <svg class="i"><use href="#i-external" /></svg></a>
+        </li>
+        <li class="mini reveal" data-tags="ml">
+          <h4>Chicken disease classification</h4>
+          <p>A CNN that tells coccidiosis from healthy samples, with versioned data (DVC), a Dockerised app and a GitHub
+            Actions image build.</p>
+          <p class="mini-meta">TensorFlow · DVC · Docker · CI/CD</p>
+          <a href="https://github.com/KushalranaAI/Chicken-Disease-Classification" target="_blank" rel="noopener">Repository <svg class="i"><use href="#i-external" /></svg></a>
+        </li>
+        <li class="mini reveal" data-tags="ml genai">
+          <h4>Text summarisation</h4>
+          <p>Fine-tunes a Pegasus transformer for dialogue summarisation, as a staged training pipeline with a serving app.</p>
+          <p class="mini-meta">Hugging Face · Transformers · NLP</p>
+          <a href="https://github.com/KushalranaAI/Text-summarization-project" target="_blank" rel="noopener">Repository <svg class="i"><use href="#i-external" /></svg></a>
+        </li>
+        <li class="mini reveal" data-tags="ml systems">
+          <h4>Barter: content recommender</h4>
+          <p>A team project. I owned the data (MongoDB Atlas, NLTK cleaning), the recommendation model and its FastAPI
+            service, deployed with Docker.</p>
+          <p class="mini-meta">NLP · FastAPI · Docker · MongoDB</p>
+          <a href="https://github.com/KushalranaAI/barter_recom" target="_blank" rel="noopener">Repository <svg class="i"><use href="#i-external" /></svg></a>
+        </li>
+        <li class="mini reveal" data-tags="systems">
+          <h4>Django recipe API</h4>
+          <p>A test-driven REST API with custom users, token auth and recipes, running in Docker Compose.</p>
+          <p class="mini-meta">Django · DRF · Docker · TDD</p>
+          <a href="https://github.com/KushalranaAI/Django-All-in-One" target="_blank" rel="noopener">Repository <svg class="i"><use href="#i-external" /></svg></a>
+        </li>
+      </ul>
+      <p class="empty-note" id="empty-note" hidden>No projects in this category yet.</p>
+    </section>
 
-  <!-- Link To JS -->
-  <script src="./js/script.js"></script>
+    <!-- ============ Skills ============ -->
+    <section class="section container" id="skills" aria-labelledby="skills-title">
+      <header class="section-head">
+        <p class="eyebrow">Skills</p>
+        <h2 id="skills-title">What I work with</h2>
+        <p class="section-lead">Grouped by what I use it for. Everything here has been in production or in a project above.</p>
+      </header>
+      <div class="skill-grid">
+        <div class="skill-card reveal"><h3>Generative AI &amp; agents</h3>
+          <ul class="chips"><li>LLMs</li><li>RAG</li><li>Agentic AI</li><li>Multi-agent systems</li><li>MCP</li><li>Tool calling</li><li>Hybrid &amp; semantic search</li><li>Prompt engineering</li><li>LangChain</li><li>LlamaIndex</li><li>Vector databases</li></ul></div>
+        <div class="skill-card reveal"><h3>Machine learning &amp; CV</h3>
+          <ul class="chips"><li>Classical ML</li><li>Deep learning</li><li>Computer vision</li><li>NLP</li><li>PyTorch</li><li>TensorFlow</li><li>Feature engineering</li><li>Model evaluation</li><li>ML pipelines</li></ul></div>
+        <div class="skill-card reveal"><h3>LLMOps &amp; MLOps</h3>
+          <ul class="chips"><li>Langfuse</li><li>LangSmith</li><li>LLM tracing</li><li>Prompt management</li><li>LLM evaluation</li><li>MLflow</li><li>DVC</li><li>Airflow</li></ul></div>
+        <div class="skill-card reveal"><h3>Backend &amp; APIs</h3>
+          <ul class="chips"><li>Python</li><li>FastAPI</li><li>Django</li><li>REST API design</li><li>Microservices</li><li>SQL</li><li>JavaScript</li><li>C++</li></ul></div>
+        <div class="skill-card reveal"><h3>Data &amp; storage</h3>
+          <ul class="chips"><li>PostgreSQL</li><li>MongoDB</li><li>Redis</li><li>Vector databases</li></ul></div>
+        <div class="skill-card reveal"><h3>Cloud, DevOps &amp; design</h3>
+          <ul class="chips"><li>Azure</li><li>Docker</li><li>Kubernetes</li><li>GitHub Actions</li><li>CI/CD</li><li>Linux</li><li>Multi-tenant SaaS</li><li>System design</li></ul></div>
+      </div>
+    </section>
+
+    <!-- ============ About ============ -->
+    <section class="section container" id="about" aria-labelledby="about-title">
+      <div class="about-grid">
+        <div>
+          <header class="section-head">
+            <p class="eyebrow">About</p>
+            <h2 id="about-title">Engineer first, then AI</h2>
+          </header>
+          <div class="prose">
+            <p>I like owning a system from the first architecture sketch to the dashboards that watch it in production. Most
+              of my work sits where models meet real software: ML that has to price thousands of rooms every day, and agents
+              that answer enterprise questions without ever crossing a tenant boundary.</p>
+            <p>I care about the unglamorous parts that make AI reliable: clean data pipelines, evaluation, tracing, access
+              control and APIs other teams can depend on. Outside work I build open-source learning platforms, because
+              explaining something end to end is the best way I know to really understand it.</p>
+          </div>
+        </div>
+        <div class="about-side">
+          <div class="info-card reveal">
+            <h3>Certifications</h3>
+            <ul class="cert-list">
+              <li><svg class="i"><use href="#i-award" /></svg><div><b>AWS Certified Machine Learning Engineer, Associate</b><a href="https://www.credly.com/badges/059455e3-be6a-442d-915a-e6f356022950/linked_in_profile" target="_blank" rel="noopener">View credential</a></div></li>
+              <li><svg class="i"><use href="#i-award" /></svg><div><b>Machine Learning Specialization, DeepLearning.AI</b><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/RFH4YLMKEJTV" target="_blank" rel="noopener">View credential</a></div></li>
+              <li><svg class="i"><use href="#i-award" /></svg><div><b>System Design Masterclass (2025)</b><a href="https://www.udemy.com/certificate/UC-6e4f94e7-b582-415e-be33-b4802fe1b974/" target="_blank" rel="noopener">View credential</a></div></li>
+              <li><svg class="i"><use href="#i-award" /></svg><div><b>Docker Mastery: Kubernetes + Docker Swarm</b><a href="https://www.udemy.com/certificate/UC-839367c8-e0f0-47f3-b411-947fc33622ab/" target="_blank" rel="noopener">View credential</a></div></li>
+            </ul>
+          </div>
+          <div class="info-card reveal">
+            <h3>Education &amp; recognition</h3>
+            <p><b>B.Tech, Computer Science &amp; Engineering</b><br />I.K. Gujral Punjab Technical University · 2020–2024 · CGPA 8.0/10</p>
+            <p><b>3rd place out of 60+ teams</b><br />Bharat Tech Experience Hackathon, 2024</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Contact ============ -->
+    <section class="section container" id="contact" aria-labelledby="contact-title">
+      <div class="contact-card reveal">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">Let's build something that ships.</h2>
+        <p>Open to conversations about AI engineering roles, agentic systems and interesting ML problems.</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:kushalrana448@gmail.com"><svg class="i"><use href="#i-mail" /></svg> kushalrana448@gmail.com</a>
+          <button class="btn" type="button" id="copy-email" data-email="kushalrana448@gmail.com"><svg class="i"><use href="#i-copy" /></svg> <span>Copy email</span></button>
+        </div>
+        <ul class="social center" aria-label="Profiles">
+          <li><a href="https://github.com/KushalranaAI" target="_blank" rel="noopener" aria-label="GitHub"><svg class="i"><use href="#i-github" /></svg></a></li>
+          <li><a href="https://www.linkedin.com/in/kushal-rana" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="i"><use href="#i-linkedin" /></svg></a></li>
+          <li><a href="https://x.com/KushalranaAI" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg class="i"><use href="#i-x" /></svg></a></li>
+          <li><a href="https://kushalrana448.medium.com/" target="_blank" rel="noopener" aria-label="Medium blog"><svg class="i"><use href="#i-medium" /></svg></a></li>
+          <li><a href="https://www.youtube.com/@naaku-o2x" target="_blank" rel="noopener" aria-label="YouTube channel"><svg class="i"><use href="#i-youtube" /></svg></a></li>
+          <li><a href="Kushal_Rana_Resume.pdf" target="_blank" rel="noopener" aria-label="Résumé (PDF)"><svg class="i"><use href="#i-download" /></svg></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year">2026</span> Kushal Rana</p>
+      <p><a href="#top">Back to top ↑</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/site.js" defer></script>
 </body>
-
 </html>
