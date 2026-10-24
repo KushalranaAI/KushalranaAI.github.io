@@ -198,6 +198,7 @@ body::before {
 .case-points dt { font: 600 0.78rem/1.9 var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); }
 .case-points dd { margin: 0; font-size: 0.95rem; }
 .case-points b { color: var(--accent-2); }
+.case-body .project-links { margin-top: 18px; }
 
 .case-visual { margin: 0; }
 .case-visual figcaption { text-align: center; color: var(--faint); font-size: 0.8rem; margin-top: 10px; }

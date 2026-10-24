@@ -156,7 +156,8 @@
           <p class="case-tag"><span>Machine learning</span><span>SaaS</span><span>2026</span></p>
           <h3>AI-powered Revenue Management System</h3>
           <p class="case-summary">Hotels set room prices by hand from spreadsheets and instinct. I led the architecture of a
-            platform that prices rooms with ML instead, and it now runs across ~70 hotels in Malaysia.</p>
+            platform that prices rooms with ML instead. Built for SECOMS, a Malaysian hotel technology provider, it now runs
+            across ~70 hotels in Malaysia.</p>
           <dl class="case-points">
             <div><dt>Problem</dt><dd>Pricing has to react to demand, competitors and business rules, for every property, every day.</dd></div>
             <div><dt>What I built</dt><dd>End-to-end ML pipelines on ~18 months of historical data (ingestion, features,
@@ -166,6 +167,9 @@
               planned toward <b>200 properties</b>.</dd></div>
           </dl>
           <ul class="chips"><li>Python</li><li>ML pipelines</li><li>Feature engineering</li><li>FastAPI</li><li>PostgreSQL</li><li>Multi-tenant SaaS</li><li>Azure</li></ul>
+          <div class="project-links">
+            <a class="project-link" href="https://www.secoms.com.my/" target="_blank" rel="noopener"><svg class="i"><use href="#i-external" /></svg> Client: SECOMS (Malaysia)</a>
+          </div>
         </div>
         <figure class="case-visual" aria-label="Architecture of the revenue management system">
           <div class="diagram">
@@ -205,6 +209,10 @@
               and <b>permission-aware</b> access boundaries.</dd></div>
           </dl>
           <ul class="chips"><li>LangChain</li><li>LlamaIndex</li><li>Hybrid search</li><li>Tool calling</li><li>FastAPI</li><li>Django</li><li>PostgreSQL</li><li>MongoDB</li><li>Redis</li><li>Docker</li><li>Azure</li></ul>
+          <div class="project-links">
+            <a class="project-link" href="https://aviaralabs.com/product/aviara-connect/cova" target="_blank" rel="noopener"><svg class="i"><use href="#i-external" /></svg> COVA</a>
+            <a class="project-link" href="https://aviaralabs.com/product/aviara-connect" target="_blank" rel="noopener"><svg class="i"><use href="#i-external" /></svg> Aviara Connect, the platform COVA runs on</a>
+          </div>
         </div>
         <figure class="case-visual" aria-label="Architecture of the COVA agent layer">
           <div class="diagram">
@@ -261,6 +269,48 @@
           <figcaption>An illustrative trace: every step of an agent run, timed and inspectable</figcaption>
         </figure>
       </article>
+
+      <!-- Case study: NTPC -->
+      <article class="case case-flip reveal">
+        <div class="case-body">
+          <p class="case-tag"><span>Agentic RAG</span><span>Energy</span><span>2025–26</span></p>
+          <h3>NTPC: agentic RAG for enterprise knowledge</h3>
+          <p class="case-summary">NTPC is India's largest power generation company. Its staff needed answers buried across
+            thousands of documents owned by different departments, so I built agents that find the answer and show exactly
+            where it came from.</p>
+          <dl class="case-points">
+            <div><dt>Problem</dt><dd>Plant reports, Delegation of Powers (DoP) documents and policies were spread across
+              departments. Engineering, operations and management teams struggled to find the rule or figure they needed.</dd></div>
+            <div><dt>What I built</dt><dd>A LangGraph agent workflow over a Qdrant vector store: OCR ingestion, hybrid search,
+              reranking, citation guardrails and agent-level governance. Every answer links back to the exact source passage.</dd></div>
+            <div><dt>Result</dt><dd>Delivered in about four months (Nov 2025 – Feb 2026). Live in production over <b>1,000+
+              documents</b>, with every answer source-cited. Aviara reports <b>8,000+ daily users</b>.</dd></div>
+          </dl>
+          <ul class="chips"><li>LangGraph</li><li>Qdrant</li><li>Hybrid search</li><li>Rerankers</li><li>OCR</li><li>Citation guardrails</li><li>Python</li></ul>
+          <div class="project-links">
+            <a class="project-link" href="https://aviaralabs.com/solutions" target="_blank" rel="noopener"><svg class="i"><use href="#i-external" /></svg> Case study on aviaralabs.com</a>
+          </div>
+        </div>
+        <figure class="case-visual" aria-label="Architecture of the NTPC agentic RAG system">
+          <div class="diagram">
+            <div class="d-node d-wide">User question<small>"Who can approve a procurement above this limit?"</small></div>
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-node d-wide accent">LangGraph agent · query routing · governance</div>
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-row">
+              <span class="d-node accent-2">Hybrid search<small>Qdrant</small></span>
+              <span class="d-node accent-2">Reranker</span>
+              <span class="d-node accent-2">OCR'd corpus<small>1,000+ docs</small></span>
+            </div>
+            <div class="d-arrow" aria-hidden="true"></div>
+            <div class="d-row">
+              <span class="d-node">Citation guardrail</span>
+              <span class="d-node ok">Answer + sources</span>
+            </div>
+          </div>
+          <figcaption>Retrieve, rerank, verify citations, then answer</figcaption>
+        </figure>
+      </article>
     </section>
 
     <!-- ============ Experience ============ -->
@@ -290,6 +340,7 @@
             <p>Grew from implementing features to owning AI components, backend systems and production architecture.</p>
             <ul>
               <li>Shipped ML and deep learning models, document processing, retrieval and generative AI features.</li>
+              <li>Built NTPC's agentic RAG system, now live in production, with source-cited answers over 1,000+ documents.</li>
               <li>Built backend services, data pipelines, database schemas and APIs used across production platforms.</li>
               <li>Made development reproducible with Docker, Git, Azure, MLflow, DVC and CI/CD.</li>
             </ul>
