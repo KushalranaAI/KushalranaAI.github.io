@@ -126,16 +126,4 @@ export const earlierProjects: EarlierProject[] = [
     stack: "NLP · FastAPI · Docker · MongoDB",
     repo: "https://github.com/KushalranaAI/barter_recom",
   },
-  {
-    title: "Django recipe API",
-    blurb: "A test-driven REST API with custom users, token auth and recipes, running in Docker Compose.",
-    stack: "Django · DRF · Docker · TDD",
-    repo: "https://github.com/KushalranaAI/Django-All-in-One",
-  },
-  {
-    title: "KynAI v0: data analyst agent",
-    blurb: "The first KynAI: a LangChain ReAct agent with a Python tool that cleaned data and drew charts. Retired and rebuilt as the incident investigator above; the code lives on at the legacy-chatbot tag.",
-    stack: "LangChain · OpenAI · FastAPI · Docker",
-    repo: "https://github.com/KushalranaAI/KynAI/tree/legacy-chatbot",
-  },
 ];
