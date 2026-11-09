@@ -11,6 +11,24 @@ interface Props {
   onSelect: (id: string) => void;
 }
 
+function Story({ items, start }: { items: { label: string; body: string }[]; start: number }) {
+  return (
+    <dl className="modal-story">
+      {items.map((s, i) => (
+        <div key={s.label}>
+          <dt>
+            <i>{String(start + i + 1).padStart(2, "0")}</i>
+            {s.label}
+          </dt>
+          <dd>
+            <Rich text={s.body} />
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 /** Full case study in a slide-over panel. Esc closes, focus is trapped inside, and the page behind is locked. */
 export function CaseModal({ study, onClose, onSelect }: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -54,12 +72,13 @@ export function CaseModal({ study, onClose, onSelect }: Props) {
     scrollerRef.current?.scrollTo({ top: 0 });
   }, [study.id]);
 
-  const sections: { label: string; body: string }[] = [
+  const head: { label: string; body: string }[] = [
     { label: "Problem", body: study.problem },
     { label: "What I built", body: study.built },
     ...(study.role ? [{ label: "My role", body: study.role }] : []),
-    { label: "Result", body: study.result },
+    ...(study.sections ?? []),
   ];
+  const result = { label: "Result", body: study.result };
 
   return (
     <motion.div
@@ -120,19 +139,57 @@ export function CaseModal({ study, onClose, onSelect }: Props) {
 
             <Diagram key={study.id} data={study.diagram} />
 
-            <dl className="modal-story">
-              {sections.map((s, i) => (
-                <div key={s.label}>
-                  <dt>
-                    <i>{String(i + 1).padStart(2, "0")}</i>
-                    {s.label}
-                  </dt>
-                  <dd>
-                    <Rich text={s.body} />
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <Story items={head} start={0} />
+
+            {study.decisions && (
+              <div className="modal-block">
+                <h3 className="modal-h">Key decisions</h3>
+                <ul className="decisions">
+                  {study.decisions.map((d) => (
+                    <li key={d.title}>
+                      <p className="decision-q">{d.title}</p>
+                      <p className="decision-a">
+                        <span className="tag-chose">Chose</span> {d.chose}
+                        {d.over && (
+                          <>
+                            {" "}
+                            <span className="tag-over">over</span> {d.over}
+                          </>
+                        )}
+                      </p>
+                      <p className="decision-why">{d.why}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {study.problems && (
+              <div className="modal-block">
+                <h3 className="modal-h">Hardest problem</h3>
+                {study.problems.map((p) => (
+                  <article className="problem" key={p.title}>
+                    <h4>{p.title}</h4>
+                    <dl>
+                      <div>
+                        <dt>Symptom</dt>
+                        <dd>{p.symptom}</dd>
+                      </div>
+                      <div>
+                        <dt>Real cause</dt>
+                        <dd>{p.cause}</dd>
+                      </div>
+                      <div>
+                        <dt>Fix</dt>
+                        <dd>{p.fix}</dd>
+                      </div>
+                    </dl>
+                  </article>
+                ))}
+              </div>
+            )}
+
+            <Story items={[result]} start={head.length} />
 
             <ul className="chips">
               {study.stack.map((s) => (

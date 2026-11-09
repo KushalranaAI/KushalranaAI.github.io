@@ -16,14 +16,17 @@ npm run preview  # serve the production build
 | Path | What it is |
 |---|---|
 | `src/data/*.ts` | **All the content.** Edit these, not the components. |
-| `src/components/` | One file per section (`Hero`, `Work`, `Lab`, `Experience`, `Skills`, `About`, `Contact`) plus shared pieces (`Nav`, `Cursor`, `Preloader`, `Diagram`, `CaseModal`) |
+| `src/components/` | One file per section (`Hero`, `Work`, `Projects`, `Pathways`, `Experience`, `Skills`, `About`, `Contact`) plus shared pieces (`Nav`, `Cursor`, `Preloader`, `Diagram`, `CaseModal`) |
 | `src/styles/global.css` | design tokens (dark + light themes), buttons, nav, cursor, preloader |
 | `src/styles/sections.css` | styles for each section, in page order, with the responsive rules at the bottom |
 | `public/` | copied as-is: `assets/img/` (portrait, project screenshots, `og.png`), `Kushal_Rana_Resume.pdf`, `404.html` |
 
 ## Common edits
 
-- **Add a personal project:** append an object to `labProjects` in `src/data/lab.ts` (newest first) and drop a screenshot in `public/assets/img/projects/`. The card, the filters and the project count update by themselves. Delete the `<NextCard />` line in `src/components/Lab.tsx` once the first one ships.
+- **Three kinds of work, kept separate** (see `Tracks.tsx`):
+  - *Professional work* (Aviara Labs case studies): `src/data/cases.ts`.
+  - *Personal projects* (my own systems, with a build status and the numbers they will publish): `src/data/projects.ts`. Leave `repo` unset until the GitHub repo exists. Once a gate passes, add real values to `results` and set `status: "shipped"`. Never add a number that has not been measured.
+  - *Learning pathways* (free, open-source self-learning roadmaps): `src/data/pathways.ts`. Append an object (newest first) and drop a screenshot in `public/assets/img/projects/`; the card, filters and count update by themselves.
 - **Add or edit a case study:** `src/data/cases.ts`. Each one has card copy (`hook`, `metrics`), the full story, and a `diagram` (a `flow` of rows and nodes, or a `trace`).
 - **Update the résumé:** replace `public/Kushal_Rana_Resume.pdf` (keep the file name).
 - **Change colours:** the tokens at the top of `src/styles/global.css`.

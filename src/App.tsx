@@ -4,12 +4,14 @@ import { Contact } from "./components/Contact";
 import { Cursor } from "./components/Cursor";
 import { Experience } from "./components/Experience";
 import { Hero } from "./components/Hero";
-import { Lab } from "./components/Lab";
 import { Marquee } from "./components/Marquee";
 import { Nav } from "./components/Nav";
+import { Pathways } from "./components/Pathways";
 import { Preloader, shouldIntro } from "./components/Preloader";
+import { Projects } from "./components/Projects";
 import { Skills } from "./components/Skills";
 import { Stats } from "./components/Stats";
+import { Tracks } from "./components/Tracks";
 import { Work } from "./components/Work";
 import { profile } from "./data/profile";
 import { ScrollProvider } from "./hooks/useLenis";
@@ -31,8 +33,10 @@ export default function App() {
         <Hero ready={ready} />
         <Marquee />
         <Stats />
+        <Tracks />
         <Work />
-        <Lab />
+        <Projects />
+        <Pathways />
         <Experience />
         <Skills />
         <About />

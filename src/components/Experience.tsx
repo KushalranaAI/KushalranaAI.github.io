@@ -22,7 +22,7 @@ export function Experience() {
       <div className="container">
         <header className="section-head">
           <Reveal>
-            <p className="eyebrow">03 · Experience</p>
+            <p className="eyebrow">04 · Experience</p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 id="exp-title">
