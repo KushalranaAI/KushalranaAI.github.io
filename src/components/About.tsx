@@ -1,4 +1,4 @@
-import { certs } from "../data/profile";
+import { certs, education } from "../data/profile";
 import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
 
@@ -19,10 +19,18 @@ export function About() {
 
         <div className="bento">
           <Reveal className="bento-cell b-story">
+            <div className="story-photo">
+              <img src="/assets/img/kushal-casual.webp" width={72} height={72} alt="Kushal Rana" loading="lazy" />
+              <span>
+                <b>Kushal Rana</b>
+                Software Engineer · AI &amp; Backend · Noida
+              </span>
+            </div>
             <p>
-              I like owning a system from the first architecture sketch to the dashboards that watch it in production. Most of my
-              work sits where models meet real software: ML that has to price thousands of rooms every day, and agents that answer
-              enterprise questions without ever crossing a tenant boundary.
+              I work in two halves that feed each other. On the AI side: LLM fine-tuning, agentic systems and RAG. On the backend
+              side: distributed, scalable architectures, system design and low-level design. I like owning a system from the first
+              architecture sketch to the dashboards that watch it in production: ML that has to price thousands of rooms every day,
+              and agents that answer enterprise questions without ever crossing a tenant boundary.
             </p>
             <p>
               I care about the unglamorous parts that make AI reliable: clean data pipelines, evaluation, tracing, access control
@@ -43,13 +51,17 @@ export function About() {
 
           <Reveal delay={0.12} className="bento-cell b-edu">
             <p className="cell-label">Education</p>
-            <p>
-              <b>B.Tech, Computer Science &amp; Engineering</b>
-              <br />
-              I.K. Gujral Punjab Technical University
-              <br />
-              2020–2024 · CGPA 8.0/10
-            </p>
+            <ol className="edu-list">
+              {education.map((e) => (
+                <li key={e.title}>
+                  <b>{e.title}</b>
+                  <span>{e.school}</span>
+                  <span>
+                    {e.when} · {e.grade}
+                  </span>
+                </li>
+              ))}
+            </ol>
           </Reveal>
 
           <Reveal delay={0.16} className="bento-cell b-certs">
@@ -58,8 +70,11 @@ export function About() {
               {certs.map((c) => (
                 <li key={c.href}>
                   <a href={c.href} target="_blank" rel="noopener" data-cursor="View">
-                    <Icon name="award" />
-                    <span>{c.title}</span>
+                    <img className="cert-logo" src={c.logo} alt="" width={26} height={26} loading="lazy" />
+                    <span>
+                      {c.title}
+                      <small>{c.issuer}</small>
+                    </span>
                     <Icon name="arrow-up-right" className="cert-arrow" />
                   </a>
                 </li>

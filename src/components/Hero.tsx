@@ -7,7 +7,7 @@ import { Magnetic } from "./Magnetic";
 import { NeuralField } from "./NeuralField";
 import { SplitLine } from "./Reveal";
 
-const BADGE = "AI ENGINEER • AGENTS • RAG • LLMOPS • ML • ";
+const BADGE = "AI + BACKEND • AGENTS • RAG • LLMOPS • SYSTEMS • ";
 
 export function Hero({ ready }: { ready: boolean }) {
   const { scrollTo } = useSmoothScroll();
@@ -52,7 +52,8 @@ export function Hero({ ready }: { ready: boolean }) {
           </h1>
 
           <motion.p className="hero-role" {...fadeUp(0.75)}>
-            {profile.role} <span aria-hidden="true">/</span> <em>{profile.headline}</em>
+            <strong>{profile.role}</strong>
+            <em>{profile.headline}</em>
           </motion.p>
 
           <motion.p className="lead" {...fadeUp(0.9)}>
@@ -105,7 +106,7 @@ export function Hero({ ready }: { ready: boolean }) {
           }}
         >
           <motion.div className="portrait" style={{ rotateX: rx, rotateY: ry }} data-cursor="Hi 👋">
-            <img src={profile.photo} width={720} height={720} alt={`Portrait of ${profile.name}`} fetchPriority="high" />
+            <img src={profile.photo} width={720} height={900} alt={`Portrait of ${profile.name}`} fetchPriority="high" />
             <span className="portrait-shine" aria-hidden="true" />
           </motion.div>
 
