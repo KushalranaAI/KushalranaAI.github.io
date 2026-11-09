@@ -100,7 +100,7 @@ export function Work() {
       <div className="container">
         <header className="section-head">
           <Reveal>
-            <p className="eyebrow">01 · Selected work</p>
+            <p className="eyebrow">01 · Professional work</p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 id="work-title">
@@ -109,7 +109,7 @@ export function Work() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="section-lead">
-              Built at Aviara Labs. The code is private, so each card tells the story: the problem, what I built and what it does
+              Shipped at Aviara Labs to real users. The code is private, so each card tells the story: the problem, what I built and what it does
               today. Open one for the architecture.
             </p>
           </Reveal>

@@ -25,7 +25,7 @@ export function Contact() {
     <section className="section contact" id="contact" aria-labelledby="contact-title">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">06 · Contact</p>
+          <p className="eyebrow">07 · Contact</p>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 id="contact-title" className="contact-title">

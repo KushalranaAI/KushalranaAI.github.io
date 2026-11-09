@@ -8,7 +8,7 @@ export function About() {
       <div className="container">
         <header className="section-head">
           <Reveal>
-            <p className="eyebrow">05 · About</p>
+            <p className="eyebrow">06 · About</p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 id="about-title">
@@ -26,8 +26,9 @@ export function About() {
             </p>
             <p>
               I care about the unglamorous parts that make AI reliable: clean data pipelines, evaluation, tracing, access control
-              and APIs other teams can depend on. Outside work I build open-source learning platforms, because explaining
-              something end to end is the best way I know to really understand it.
+              and APIs other teams can depend on. Outside work I do two separate things: build personal projects that stress-test production patterns,
+              and publish the roadmaps I follow as open-source learning pathways, because explaining something end to end is the
+              best way I know to really understand it.
             </p>
           </Reveal>
 

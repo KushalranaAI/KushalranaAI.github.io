@@ -12,7 +12,7 @@ export function Skills() {
       <div className="container">
         <header className="section-head">
           <Reveal>
-            <p className="eyebrow">04 · Skills</p>
+            <p className="eyebrow">05 · Skills</p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 id="skills-title">

@@ -1,19 +1,19 @@
-export type LabTag = "genai" | "ml" | "systems";
+export type PathwayTag = "genai" | "ml" | "systems";
 
-export const labFilters: { id: "all" | LabTag; label: string }[] = [
+export const pathwayFilters: { id: "all" | PathwayTag; label: string }[] = [
   { id: "all", label: "All" },
   { id: "genai", label: "GenAI & agents" },
   { id: "ml", label: "ML & CV" },
   { id: "systems", label: "Backend & systems" },
 ];
 
-export interface LabProject {
+export interface Pathway {
   id: string;
   title: string;
   blurb: string;
   stats: string[];
   stack: string[];
-  tags: LabTag[];
+  tags: PathwayTag[];
   /** Screenshot under /public. Projects without one render a generated visual. */
   image?: string;
   visual?: "rag";
@@ -23,10 +23,11 @@ export interface LabProject {
 }
 
 /**
- * Personal projects and open-source platforms. To add a new project, append an object here:
+ * Learning pathways: free, open-source roadmaps I follow and publish so other engineers can learn a field end to end.
+ * These are NOT personal projects (see projects.ts). To add one, append an object here:
  * the rail, the filters and the count all pick it up. Put the newest first.
  */
-export const labProjects: LabProject[] = [
+export const pathways: Pathway[] = [
   {
     id: "ai-path",
     title: "AI Engineer Path",
@@ -115,59 +116,5 @@ export const labProjects: LabProject[] = [
     alt: "OOP course showing a step-through memory trace of object creation",
     live: "https://kushalranaai.github.io/OOP-All-In-One/",
     repo: "https://github.com/KushalranaAI/OOP-All-In-One",
-  },
-];
-
-export interface EarlierProject {
-  title: string;
-  blurb: string;
-  stack: string;
-  tags: LabTag[];
-  repo: string;
-}
-
-export const earlierProjects: EarlierProject[] = [
-  {
-    title: "KynAI: data analyst agent",
-    blurb:
-      "Upload a dataset and ask questions. A LangChain ReAct agent with a Python tool cleans the data, analyses it and draws charts, all behind a FastAPI service.",
-    stack: "LangChain · OpenAI · FastAPI · Docker",
-    tags: ["genai", "systems"],
-    repo: "https://github.com/KushalranaAI/KynAI",
-  },
-  {
-    title: "Kidney disease classification",
-    blurb: "A VGG16 transfer-learning CT-scan classifier with a modular pipeline, MLflow experiment tracking and DVC stages.",
-    stack: "TensorFlow · MLflow · DVC · Docker",
-    tags: ["ml"],
-    repo: "https://github.com/KushalranaAI/Kidney-Disease-Classification",
-  },
-  {
-    title: "Chicken disease classification",
-    blurb: "A CNN that tells coccidiosis from healthy samples, with versioned data (DVC), a Dockerised app and a GitHub Actions image build.",
-    stack: "TensorFlow · DVC · Docker · CI/CD",
-    tags: ["ml"],
-    repo: "https://github.com/KushalranaAI/Chicken-Disease-Classification",
-  },
-  {
-    title: "Text summarisation",
-    blurb: "Fine-tunes a Pegasus transformer for dialogue summarisation, as a staged training pipeline with a serving app.",
-    stack: "Hugging Face · Transformers · NLP",
-    tags: ["ml", "genai"],
-    repo: "https://github.com/KushalranaAI/Text-summarization-project",
-  },
-  {
-    title: "Barter: content recommender",
-    blurb: "A team project. I owned the data (MongoDB Atlas, NLTK cleaning), the recommendation model and its FastAPI service, deployed with Docker.",
-    stack: "NLP · FastAPI · Docker · MongoDB",
-    tags: ["ml", "systems"],
-    repo: "https://github.com/KushalranaAI/barter_recom",
-  },
-  {
-    title: "Django recipe API",
-    blurb: "A test-driven REST API with custom users, token auth and recipes, running in Docker Compose.",
-    stack: "Django · DRF · Docker · TDD",
-    tags: ["systems"],
-    repo: "https://github.com/KushalranaAI/Django-All-in-One",
   },
 ];

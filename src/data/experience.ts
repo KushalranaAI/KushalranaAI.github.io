@@ -18,7 +18,7 @@ export const roles: Role[] = [
     summary:
       "I own AI architecture across the company's platforms: the ML revenue management system, the COVA agentic AI layer and the Aviara Eye observability stack.",
     points: [
-      "Solo-built and run a multi-tenant hotel revenue platform, from requirements and client management to deployment. It is live in 80+ hotels, lifting revenue 12% and occupancy 9%.",
+      "Solo-built and run a multi-tenant hotel revenue platform, from requirements and client management to deployment. It is live in 80+ hotels; the client reports RevPAR up 12% and occupancy up 9% year on year.",
       "Architected production RAG and multi-agent workflows with tenant isolation and permission-aware retrieval.",
       "Established LLM tracing and prompt management across all generative AI apps.",
     ],

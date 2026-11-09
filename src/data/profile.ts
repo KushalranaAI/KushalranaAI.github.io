@@ -38,8 +38,8 @@ export interface Stat {
 export const stats: Stat[] = [
   { value: 80, suffix: "+", label: "hotels running my ML pricing platform, scaling toward 200" },
   { value: 1, prefix: "$", suffix: "M+", label: "ARR the pricing platform brings our client" },
-  { value: 12, prefix: "+", suffix: "%", label: "revenue for partner hotels in 7 months, occupancy up 9%" },
-  { value: 7, label: "open-source learning platforms on RAG, LLMs, ML, systems and Python" },
+  { value: 12, prefix: "+", suffix: "%", label: "RevPAR for partner hotels vs last year, occupancy up 9% (client-reported)" },
+  { value: 7, label: "open-source learning pathways on RAG, LLMs, ML, systems and Python" },
 ];
 
 export const certs = [
@@ -63,7 +63,8 @@ export const certs = [
 
 export const nav = [
   { id: "work", label: "Work" },
-  { id: "lab", label: "Projects" },
+  { id: "projects", label: "Projects" },
+  { id: "pathways", label: "Learning" },
   { id: "experience", label: "Experience" },
   { id: "skills", label: "Skills" },
   { id: "about", label: "About" },
