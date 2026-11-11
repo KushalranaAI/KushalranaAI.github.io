@@ -69,7 +69,7 @@ export function Nav({ ready }: { ready: boolean }) {
               scrollTo("top");
             }}
           >
-            <img className="brand-mark" src="/assets/img/avatar-96.png" width={32} height={32} alt="" />
+            <img className="brand-mark" src="/assets/img/avatar-96.png?v=2" width={32} height={32} alt="" />
             <span className="brand-name">{profile.name}</span>
           </a>
 

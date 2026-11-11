@@ -8,7 +8,7 @@ export const profile = {
   location: "Noida, India",
   email: "kushalrana448@gmail.com",
   resume: "/Kushal_Rana_Resume.pdf",
-  photo: "/assets/img/kushal.webp",
+  photo: "/assets/img/kushal.webp?v=2",
   headline: "I build AI systems, and the scalable backends they run on.",
   intro:
     "I work across the AI stack, from LLM fine-tuning to agentic systems, and design distributed, scalable backends with solid system design and low-level design. I own it end to end: an ML revenue platform I built solo, running in 80+ hotels, enterprise agentic RAG, and LLM observability for the teams that run it.",
