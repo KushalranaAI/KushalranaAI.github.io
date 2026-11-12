@@ -2,16 +2,11 @@ import { useCallback, useState } from "react";
 import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import { Cursor } from "./components/Cursor";
-import { Experience } from "./components/Experience";
 import { Hero } from "./components/Hero";
-import { Marquee } from "./components/Marquee";
 import { Nav } from "./components/Nav";
 import { Pathways } from "./components/Pathways";
 import { Preloader, shouldIntro } from "./components/Preloader";
 import { Projects } from "./components/Projects";
-import { Skills } from "./components/Skills";
-import { Stats } from "./components/Stats";
-import { Tracks } from "./components/Tracks";
 import { Work } from "./components/Work";
 import { profile } from "./data/profile";
 import { ScrollProvider } from "./hooks/useLenis";
@@ -31,14 +26,9 @@ export default function App() {
       <Nav ready={ready} />
       <main>
         <Hero ready={ready} />
-        <Marquee />
-        <Stats />
-        <Tracks />
         <Work />
         <Projects />
         <Pathways />
-        <Experience />
-        <Skills />
         <About />
         <Contact />
       </main>

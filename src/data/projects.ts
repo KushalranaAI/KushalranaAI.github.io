@@ -6,13 +6,14 @@
  * passes, add the real values to `results` and flip `status` to "shipped".
  */
 
-export type ProjectStatus = "shipped" | "building" | "next" | "queued";
+export type ProjectStatus = "shipped" | "building" | "next" | "queued" | "planned";
 
 export const statusLabel: Record<ProjectStatus, string> = {
   shipped: "Shipped",
   building: "Building now",
   next: "Up next",
   queued: "Queued",
+  planned: "Planned",
 };
 
 export interface PersonalProject {
@@ -43,7 +44,7 @@ export const personalProjects: PersonalProject[] = [
     num: "01",
     name: "KynAI",
     tagline:
-      "A terminal-first, multi-agent incident investigator. Bring your own API key, describe the incident, and get a root-cause report with file-and-line evidence.",
+      "A terminal-first, multi-agent incident investigator: describe an incident, get a root-cause report with file-and-line evidence.",
     proves: "AI & LLM engineering: agent design, MCP tools, evals, guardrails",
     status: "next",
     window: "Nov 10 – 23, 2026",
@@ -57,7 +58,7 @@ export const personalProjects: PersonalProject[] = [
     num: "02",
     name: "Relay",
     tagline:
-      "Reliable webhook delivery with a TypeScript dashboard: transactional outbox, signed payloads, retries with backoff, dead-letter queue and one-click replay.",
+      "Reliable webhook delivery: transactional outbox, signed payloads, retries with backoff, a dead-letter queue and one-click replay.",
     proves: "Backend reliability and TypeScript depth",
     status: "queued",
     window: "Nov 24 – Dec 7, 2026",
@@ -70,7 +71,7 @@ export const personalProjects: PersonalProject[] = [
     num: "03",
     name: "RevSQL",
     tagline:
-      "A 7–8B open model fine-tuned with QLoRA to turn revenue-manager questions into SQL, benchmarked against a prompted frontier model on accuracy, latency and cost.",
+      "A 7–8B open model fine-tuned with QLoRA to turn revenue questions into SQL, benchmarked against a frontier model on accuracy, latency and cost.",
     proves: "LLM fine-tuning and ML evaluation",
     status: "queued",
     window: "Dec 8 – 21, 2026",
@@ -83,7 +84,7 @@ export const personalProjects: PersonalProject[] = [
     num: "04",
     name: "Switchboard",
     tagline:
-      "A production LLM gateway in Go: one OpenAI-compatible API in front of hosted and self-hosted models, with routing, failover, rate limits, budgets, caching and full observability.",
+      "An LLM gateway in Go: one OpenAI-compatible API over hosted and self-hosted models, with routing, failover, budgets and caching.",
     proves: "System design, distributed systems and DevOps",
     status: "queued",
     window: "Dec 22, 2026 – Jan 11, 2027",
@@ -93,37 +94,83 @@ export const personalProjects: PersonalProject[] = [
   },
 ];
 
-export interface EarlierProject {
-  title: string;
+export type BuildArea = "ai" | "systems" | "frontend" | "ml";
+
+export const buildAreas: { id: BuildArea; label: string }[] = [
+  { id: "ai", label: "AI & agents" },
+  { id: "systems", label: "Systems & data" },
+  { id: "frontend", label: "Frontend" },
+  { id: "ml", label: "Machine learning" },
+];
+
+export interface Build {
+  id: string;
+  name: string;
   blurb: string;
-  stack: string;
-  repo: string;
+  area: BuildArea;
+  status: ProjectStatus;
+  stack: string[];
+  /** Leave undefined until the repo exists, so the card never links to a 404. */
+  repo?: string;
+  live?: string;
 }
 
-/** Earlier personal projects, before the current platform. */
-export const earlierProjects: EarlierProject[] = [
+/**
+ * Every personal project outside the flagship platform: new side builds and older ones alike.
+ * To add one, append an object here. Filters and counts pick it up, and areas with no projects stay hidden.
+ * Active and planned work first, shipped work after.
+ */
+export const builds: Build[] = [
   {
-    title: "Kidney disease classification",
+    id: "mcp-gateway",
+    name: "MCP Gateway",
+    blurb: "A gateway for MCP servers, separate from Switchboard's model gateway.",
+    area: "ai",
+    status: "planned",
+    stack: ["MCP"],
+  },
+  {
+    id: "graphdb",
+    name: "GraphDB",
+    blurb: "A knowledge-graph database built from scratch, with an in-memory cache.",
+    area: "systems",
+    status: "planned",
+    stack: ["Graph database", "From scratch"],
+  },
+  {
+    id: "kidney",
+    name: "Kidney disease classification",
     blurb: "A VGG16 transfer-learning CT-scan classifier with a modular pipeline, MLflow experiment tracking and DVC stages.",
-    stack: "TensorFlow · MLflow · DVC · Docker",
+    area: "ml",
+    status: "shipped",
+    stack: ["TensorFlow", "MLflow", "DVC", "Docker"],
     repo: "https://github.com/KushalranaAI/Kidney-Disease-Classification",
   },
   {
-    title: "Chicken disease classification",
-    blurb: "A CNN that tells coccidiosis from healthy samples, with versioned data (DVC), a Dockerised app and a GitHub Actions image build.",
-    stack: "TensorFlow · DVC · Docker · CI/CD",
+    id: "chicken",
+    name: "Chicken disease classification",
+    blurb: "A CNN that tells coccidiosis from healthy samples, with versioned data, a Dockerised app and a CI image build.",
+    area: "ml",
+    status: "shipped",
+    stack: ["TensorFlow", "DVC", "Docker", "CI/CD"],
     repo: "https://github.com/KushalranaAI/Chicken-Disease-Classification",
   },
   {
-    title: "Text summarisation",
+    id: "summarise",
+    name: "Text summarisation",
     blurb: "Fine-tunes a Pegasus transformer for dialogue summarisation, as a staged training pipeline with a serving app.",
-    stack: "Hugging Face · Transformers · NLP",
+    area: "ml",
+    status: "shipped",
+    stack: ["Hugging Face", "Transformers", "NLP"],
     repo: "https://github.com/KushalranaAI/Text-summarization-project",
   },
   {
-    title: "Barter: content recommender",
-    blurb: "A team project. I owned the data (MongoDB Atlas, NLTK cleaning), the recommendation model and its FastAPI service, deployed with Docker.",
-    stack: "NLP · FastAPI · Docker · MongoDB",
+    id: "barter",
+    name: "Barter: content recommender",
+    blurb: "Team project. I owned the data pipeline, the recommendation model and its FastAPI service, deployed with Docker.",
+    area: "ml",
+    status: "shipped",
+    stack: ["NLP", "FastAPI", "Docker", "MongoDB"],
     repo: "https://github.com/KushalranaAI/barter_recom",
   },
 ];

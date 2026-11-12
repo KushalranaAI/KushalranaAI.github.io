@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
-import { profile, socials } from "../data/profile";
+import { profile, proof, socials } from "../data/profile";
 import { useScroll as useSmoothScroll } from "../hooks/useLenis";
 import { Icon } from "./Icon";
 import { Magnetic } from "./Magnetic";
@@ -60,7 +60,17 @@ export function Hero({ ready }: { ready: boolean }) {
             {profile.intro}
           </motion.p>
 
-          <motion.div className="cta-row" {...fadeUp(1.05)}>
+          <motion.ul className="proof" aria-label="Highlights" {...fadeUp(1)}>
+            {proof.map((p) => (
+              <li key={p.label}>
+                <b>{p.value}</b>
+                <span>{p.label}</span>
+              </li>
+            ))}
+          </motion.ul>
+
+          <div className="hero-actions">
+          <motion.div className="cta-row" {...fadeUp(1.1)}>
             <Magnetic>
               <button className="btn btn-primary" type="button" onClick={() => scrollTo("work")} data-cursor="Go">
                 See my work <Icon name="arrow" />
@@ -87,6 +97,7 @@ export function Hero({ ready }: { ready: boolean }) {
               </a>
             </li>
           </motion.ul>
+          </div>
         </div>
 
         <motion.div

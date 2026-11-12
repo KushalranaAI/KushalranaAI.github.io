@@ -25,7 +25,7 @@ export function Contact() {
     <section className="section contact" id="contact" aria-labelledby="contact-title">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">07 · Contact</p>
+          <p className="eyebrow">05 · Contact</p>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 id="contact-title" className="contact-title">
@@ -33,7 +33,7 @@ export function Contact() {
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="section-lead">Open to conversations about AI engineering roles, agentic systems and interesting ML problems.</p>
+          <p className="section-lead">Open to AI and backend engineering roles, and to hard problems in agents, RAG and ML.</p>
         </Reveal>
 
         <Reveal delay={0.15} className="contact-actions">

@@ -1,12 +1,5 @@
 export type PathwayTag = "genai" | "ml" | "systems";
 
-export const pathwayFilters: { id: "all" | PathwayTag; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "genai", label: "GenAI & agents" },
-  { id: "ml", label: "ML & CV" },
-  { id: "systems", label: "Backend & systems" },
-];
-
 export interface Pathway {
   id: string;
   title: string;
@@ -25,14 +18,14 @@ export interface Pathway {
 /**
  * Learning pathways: free, open-source roadmaps I follow and publish so other engineers can learn a field end to end.
  * These are NOT personal projects (see projects.ts). To add one, append an object here:
- * the rail, the filters and the count all pick it up. Put the newest first.
+ * the rail and the count pick it up. Put the newest first.
  */
 export const pathways: Pathway[] = [
   {
     id: "ai-path",
     title: "AI Engineer Path",
     blurb:
-      "Learn AI engineering by building it, from writing software to shipping AI systems in production. Includes a Studio sandbox to design and simulate agents, RAG and GPU serving.",
+      "From writing software to shipping AI in production, with a Studio sandbox for designing agents, RAG and GPU serving.",
     stats: ["17 levels", "22 guided projects", "15 simulators"],
     stack: ["React", "TypeScript", "Agents · RAG · inference"],
     tags: ["genai"],
@@ -45,7 +38,7 @@ export const pathways: Pathway[] = [
     id: "rag",
     title: "All-in-One RAG Tutorials",
     blurb:
-      "A 30-day course from your first embedding to multi-agent systems on MCP: hybrid search, reranking, evaluation, agentic and corrective RAG, Graph RAG and guardrails.",
+      "30 days from a first embedding to multi-agent systems on MCP: hybrid search, reranking, evals, Graph RAG and guardrails.",
     stats: ["30 days", "15 projects", "Offline test suite"],
     stack: ["Claude API", "MCP", "Multi-agent", "FastAPI"],
     tags: ["genai"],
@@ -57,7 +50,7 @@ export const pathways: Pathway[] = [
     id: "llm",
     title: "LLM Engineering 1 → 100",
     blurb:
-      "How large language models work and how to ship them, from a single neuron to LLM system design. Every topic comes with the maths and a live simulation.",
+      "How LLMs work and how to ship them, from a single neuron to LLM system design. Every topic has the maths and a live simulation.",
     stats: ["9 modules", "394 topics", "40 simulations"],
     stack: ["Next.js", "TypeScript", "Transformers · RAG · agents"],
     tags: ["genai"],
@@ -70,7 +63,7 @@ export const pathways: Pathway[] = [
     id: "system-learn",
     title: "System Learn",
     blurb:
-      "Learn system design by building it. Wire load balancers, caches, queues and databases on a canvas, push traffic, break things on purpose and watch p99 latency and cost react.",
+      "Wire load balancers, caches, queues and databases on a canvas, push traffic, break things and watch p99 latency and cost react.",
     stats: ["19 modules", "129 lessons", "21 simulations"],
     stack: ["TypeScript", "React", "Kafka · Raft · sagas"],
     tags: ["systems"],
@@ -83,7 +76,7 @@ export const pathways: Pathway[] = [
     id: "ml",
     title: "Machine Learning 1 → 100",
     blurb:
-      "All of classical ML, derived from the maths and implemented from scratch: a NumPy library tested against scikit-learn, a C++17 port and 5 projects on real data.",
+      "Classical ML derived from the maths and built from scratch: a NumPy library tested against scikit-learn, plus a C++17 port.",
     stats: ["58 lessons", "16 visualisers", "98.4% MNIST CNN"],
     stack: ["NumPy", "C++17", "Next.js", "From scratch"],
     tags: ["ml"],
@@ -96,7 +89,7 @@ export const pathways: Pathway[] = [
     id: "python",
     title: "Python Projects",
     blurb:
-      "20 end-to-end projects, from a guessing game to an interpreter, a search engine and an online shop. Each has its own Flask UI, a test suite and a step-by-step build guide.",
+      "20 end-to-end builds, from a guessing game to an interpreter and a search engine, each with a Flask UI, tests and a guide.",
     stats: ["20 projects", "Flask UIs", "pytest"],
     stack: ["Python", "OOP", "Flask", "pytest"],
     tags: ["systems"],
@@ -108,7 +101,7 @@ export const pathways: Pathway[] = [
     id: "oop",
     title: "OOP in Python, C++ & JavaScript",
     blurb:
-      "How objects really work in three languages: step-through memory traces, a method-lookup explorer (MRO, vtables, prototype chains) and 5 projects with identical output.",
+      "How objects really work in three languages, with step-through memory traces and a method-lookup explorer (MRO, vtables, prototypes).",
     stats: ["3 languages", "5 projects", "Memory traces"],
     stack: ["Python", "C++20", "JavaScript", "Flask"],
     tags: ["systems"],

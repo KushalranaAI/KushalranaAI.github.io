@@ -1,11 +1,9 @@
 import { motion, useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { pathwayFilters, pathways, type Pathway } from "../data/pathways";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { pathways, type Pathway } from "../data/pathways";
 import { socials } from "../data/profile";
 import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
-
-type Filter = (typeof pathwayFilters)[number]["id"];
 
 function RagVisual() {
   const steps = ["Docs", "Chunk", "Embed", "Hybrid + rerank", "Agents · MCP"];
@@ -28,13 +26,13 @@ function RagVisual() {
 }
 
 function PathwayCard({ p, index }: { p: Pathway; index: number }) {
+  const reduce = useReducedMotion();
   return (
     <motion.article
       className="lab-card"
-      layout
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.96 }}
+      initial={reduce ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: Math.min(index * 0.06, 0.3), ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="lab-media">
@@ -42,18 +40,12 @@ function PathwayCard({ p, index }: { p: Pathway; index: number }) {
         <span className="lab-index" aria-hidden="true">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <span className="kind-badge">Open source · self-paced</span>
       </div>
       <div className="lab-body">
         <h3>{p.title}</h3>
         <p>{p.blurb}</p>
         <ul className="lab-stats">
           {p.stats.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-        <ul className="chips small">
-          {p.stack.map((s) => (
             <li key={s}>{s}</li>
           ))}
         </ul>
@@ -73,15 +65,12 @@ function PathwayCard({ p, index }: { p: Pathway; index: number }) {
 }
 
 export function Pathways() {
-  const [filter, setFilter] = useState<Filter>("all");
   const reduce = useReducedMotion();
   const railRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
   const drag = useRef({ down: false, startX: 0, startLeft: 0, moved: false });
-
-  const items = useMemo(() => pathways.filter((p) => filter === "all" || p.tags.includes(filter)), [filter]);
 
   const measure = useCallback(() => {
     const el = railRef.current;
@@ -93,9 +82,8 @@ export function Pathways() {
   }, []);
 
   useEffect(() => {
-    railRef.current?.scrollTo({ left: 0 });
     measure();
-  }, [filter, measure]);
+  }, [measure]);
 
   useEffect(() => {
     window.addEventListener("resize", measure);
@@ -128,23 +116,22 @@ export function Pathways() {
   };
 
   return (
-    <section className="section lab" id="pathways" aria-labelledby="pathways-title">
+    <section className="section lab" id="learning" aria-labelledby="learning-title">
       <div className="container">
         <header className="section-head split-head">
           <div>
             <Reveal>
-              <p className="eyebrow">03 · Learning pathways · build in public</p>
+              <p className="eyebrow">03 · Learning</p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 id="pathways-title">
-                Roadmaps I follow, <em className="serif">open to everyone.</em>
+              <h2 id="learning-title">
+                I learn in public, <em className="serif">for free.</em>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="section-lead">
-                These are the self-learning pathways I work through myself and publish as free, open-source, runnable courses, so other
-                engineers can follow the same route. They are for learning, not product work: my own systems are the personal projects
-                above.
+                When I learn a field, I publish the route as an open-source course with runnable projects and simulators, so anyone can
+                follow it.
               </p>
             </Reveal>
           </div>
@@ -158,17 +145,6 @@ export function Pathways() {
           </Reveal>
         </header>
 
-        <div className="filters" role="group" aria-label="Filter pathways">
-          {pathwayFilters.map((f) => (
-            <button key={f.id} type="button" className={`filter${filter === f.id ? " active" : ""}`} aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
-              {filter === f.id && <motion.span layoutId="filter-pill" className="filter-pill" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
-              <span>{f.label}</span>
-            </button>
-          ))}
-          <span className="filter-count" aria-live="polite">
-            {items.length} {items.length === 1 ? "pathway" : "pathways"}
-          </span>
-        </div>
       </div>
 
       <div
@@ -185,8 +161,8 @@ export function Pathways() {
         role="region"
         aria-label="Learning pathway cards, scroll horizontally"
       >
-        {items.map((p, i) => (
-          <PathwayCard key={`${filter}-${p.id}`} p={p} index={i} />
+        {pathways.map((p, i) => (
+          <PathwayCard key={p.id} p={p} index={i} />
         ))}
       </div>
 
@@ -195,7 +171,7 @@ export function Pathways() {
           <motion.i style={{ scaleX: progress }} />
         </div>
         <p className="lab-foot">
-          Every pathway is free and open source on{" "}
+          {pathways.length} pathways, all free on{" "}
           <a href={socials[0]!.href} target="_blank" rel="noopener">
             GitHub
           </a>

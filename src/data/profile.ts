@@ -9,9 +9,9 @@ export const profile = {
   email: "kushalrana448@gmail.com",
   resume: "/Kushal_Rana_Resume.pdf",
   photo: "/assets/img/kushal.webp?v=2",
-  headline: "I build AI systems, and the scalable backends they run on.",
+  headline: "I build AI systems, and the backends they run on.",
   intro:
-    "I work across the AI stack, from LLM fine-tuning to agentic systems, and design distributed, scalable backends with solid system design and low-level design. I own it end to end: an ML revenue platform I built solo, running in 80+ hotels, enterprise agentic RAG, and LLM observability for the teams that run it.",
+    "Agents, RAG, ML platforms and LLM observability, owned from the first architecture sketch to production.",
 } as const;
 
 export interface Social {
@@ -28,18 +28,16 @@ export const socials: Social[] = [
   { id: "youtube", label: "YouTube", href: "https://www.youtube.com/@naaku-o2x" },
 ];
 
-export interface Stat {
-  value: number;
-  prefix?: string;
-  suffix?: string;
+export interface Proof {
+  value: string;
   label: string;
 }
 
-export const stats: Stat[] = [
-  { value: 80, suffix: "+", label: "hotels running my ML pricing platform, scaling toward 200" },
-  { value: 1, prefix: "$", suffix: "M+", label: "ARR the pricing platform brings our client" },
-  { value: 12, prefix: "+", suffix: "%", label: "RevPAR for partner hotels vs last year, occupancy up 9% (client-reported)" },
-  { value: 7, label: "open-source learning pathways on RAG, LLMs, ML, systems and Python" },
+/** Three numbers in the hero. Each one comes from a case study in cases.ts. */
+export const proof: Proof[] = [
+  { value: "80+", label: "hotels on the ML pricing platform I built solo" },
+  { value: "8,000+", label: "questions a day through NTPC's agentic RAG" },
+  { value: "10×+", label: "cut in cost per turn on the COVA agent platform" },
 ];
 
 export const certs = [
@@ -93,14 +91,8 @@ export const education = [
 export const nav = [
   { id: "work", label: "Work" },
   { id: "projects", label: "Projects" },
-  { id: "pathways", label: "Learning" },
-  { id: "experience", label: "Experience" },
-  { id: "skills", label: "Skills" },
+  { id: "learning", label: "Learning" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ] as const;
 
-export const marqueeTech = [
-  "LangGraph", "RAG", "FastAPI", "MCP", "Qdrant", "PyTorch", "Langfuse", "PostgreSQL",
-  "Azure", "Docker", "Kubernetes", "LlamaIndex", "MLflow", "Redis", "Django", "TensorFlow",
-];
