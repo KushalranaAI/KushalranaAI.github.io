@@ -2,7 +2,7 @@
 
 Source of my portfolio: **https://kushalranaai.github.io**
 
-React 19 + Vite + TypeScript, with [Motion](https://motion.dev) for animation and [Lenis](https://lenis.darkroom.engineering) for smooth scrolling. Built and deployed to GitHub Pages by `.github/workflows/deploy.yml`.
+React 19 + Vite + TypeScript, with [Motion](https://motion.dev) for animation. `npm run build` also prerenders the page to static HTML (`scripts/prerender.mjs`), so it paints before the JavaScript loads. Built and deployed to GitHub Pages by `.github/workflows/deploy.yml`.
 
 ```bash
 npm install
@@ -16,8 +16,8 @@ npm run preview  # serve the production build
 | Path | What it is |
 |---|---|
 | `src/data/*.ts` | **All the content.** Edit these, not the components. |
-| `src/components/` | One file per section (`Hero`, `Work`, `Projects`, `Pathways`, `Experience`, `Skills`, `About`, `Contact`) plus shared pieces (`Nav`, `Cursor`, `Preloader`, `Diagram`, `CaseModal`) |
-| `src/styles/global.css` | design tokens (dark + light themes), buttons, nav, cursor, preloader |
+| `src/components/` | One file per section (`Hero`, `Work`, `Projects`, `Pathways`, `About`, `Contact`) plus shared pieces (`Nav`, `Diagram`, `CaseModal`) |
+| `src/styles/global.css` | design tokens (dark + light themes, one accent colour), buttons, nav |
 | `src/styles/sections.css` | styles for each section, in page order, with the responsive rules at the bottom |
 | `public/` | copied as-is: `assets/img/` (portrait, project screenshots, `og.png`), `Kushal_Rana_Resume.pdf`, `404.html` |
 
@@ -37,6 +37,6 @@ In the repo settings, **Pages → Build and deployment → Source** must be set 
 
 ## Design notes
 
-- One idea per section; detail is revealed on demand (case studies open in a panel, project cards on a rail, experience and skills as tabs) instead of showing everything at once.
-- Respects `prefers-reduced-motion` (no intro, no smooth scroll, no parallax, a still network graph) and only shows the custom cursor for mouse/trackpad users.
+- One idea per section; detail is revealed on demand (case studies open in a panel, the project map shows one system at a time) instead of showing everything at once.
+- Deliberately plain: no loading screen, custom cursor, background animation or scroll hijacking. Respects `prefers-reduced-motion`.
 - Keyboard accessible: skip link, tab/arrow-key navigation in experience, focus trap and Esc in the case-study panel.

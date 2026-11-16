@@ -38,8 +38,13 @@ export function Contact() {
 
         <Reveal delay={0.15} className="contact-actions">
           <Magnetic>
-            <a className="btn btn-primary btn-lg" href={`mailto:${profile.email}`} data-cursor="Email">
+            <a className="btn btn-primary btn-lg" href={`mailto:${profile.email}`}>
               <Icon name="mail" /> {profile.email}
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a className="btn btn-lg" href={`tel:${profile.phone.replace(/\s/g, "")}`}>
+              <Icon name="phone" /> {profile.phone}
             </a>
           </Magnetic>
           <Magnetic>
@@ -53,13 +58,13 @@ export function Contact() {
           <ul className="social center" aria-label="Profiles">
             {socials.map((s) => (
               <li key={s.id}>
-                <a href={s.href} target="_blank" rel="noopener" aria-label={s.label} data-cursor={s.label}>
+                <a href={s.href} target="_blank" rel="noopener" aria-label={s.label}>
                   <Icon name={s.id as "github"} />
                 </a>
               </li>
             ))}
             <li>
-              <a href={profile.resume} target="_blank" rel="noopener" aria-label="Résumé (PDF)" data-cursor="Résumé">
+              <a href={profile.resume} target="_blank" rel="noopener" aria-label="Résumé (PDF)">
                 <Icon name="download" />
               </a>
             </li>

@@ -1,96 +1,119 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useMemo, useState } from "react";
-import { buildAreas, builds, personalProjects, statusLabel, type BuildArea, type PersonalProject } from "../data/projects";
+import { useCallback, useMemo, useState } from "react";
+import { projectCases } from "../data/projectCases";
+import { buildAreas, builds, personalProjects, platformLinks, statusLabel, type BuildArea } from "../data/projects";
+import { useCaseHash } from "../hooks/useCaseHash";
+import { CaseModal } from "./CaseModal";
 import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
 
-function ProjectRow({ p, open, onToggle }: { p: PersonalProject; open: boolean; onToggle: () => void }) {
-  const reduce = useReducedMotion();
-  const panelId = `proj-${p.id}`;
-  return (
-    <li className={`proj-row${open ? " is-open" : ""}`}>
-      <button type="button" className="proj-head" aria-expanded={open} aria-controls={panelId} onClick={onToggle}>
-        <span className="proj-num" aria-hidden="true">
-          {p.num}
-        </span>
-        <span className="proj-main">
-          <span className="proj-name">
-            {p.name}
-            <span className={`status-pill is-${p.status}`}>{statusLabel[p.status]}</span>
-          </span>
-          <span className="proj-tagline">{p.tagline}</span>
-        </span>
-        <span className="proj-window">{p.window}</span>
-        <span className="proj-toggle" aria-hidden="true">
-          <Icon name="chevron" />
-        </span>
-      </button>
+const caseIds = projectCases.map((c) => c.id);
+const ease = [0.22, 1, 0.36, 1] as const;
+/** Node centres on the map, in percent: a 2 × 2 grid in the order of `personalProjects`. */
+const centre = (i: number) => ({ x: i % 2 ? 75 : 25, y: i < 2 ? 25 : 75 });
 
-      <AnimatePresence initial={false}>
-        {open && (
+/**
+ * The four systems drawn the way they connect. The map is the navigation: pick a node and the panel beside it
+ * shows that system. Built systems are solid and open a case study; the rest are dashed and say "coming soon".
+ */
+function PlatformMap({ onOpen }: { onOpen: (id: string) => void }) {
+  const [id, setId] = useState(personalProjects[0]!.id);
+  const reduce = useReducedMotion();
+  const p = personalProjects.find((x) => x.id === id)!;
+  const hasStudy = caseIds.includes(p.id);
+  const at = (pid: string) => centre(personalProjects.findIndex((x) => x.id === pid));
+
+  return (
+    <div className="pm">
+      <div className="pm-map" role="group" aria-label="Platform map: choose a system">
+        <svg className="pm-wires" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          {platformLinks.map((l) => (
+            <line key={l.label} className={l.a === id || l.b === id ? "is-active" : ""} x1={at(l.a).x} y1={at(l.a).y} x2={at(l.b).x} y2={at(l.b).y} />
+          ))}
+        </svg>
+        {platformLinks.map((l) => (
+          <span key={l.label} className={`pm-wire-label${l.a === id || l.b === id ? " is-active" : ""}`} style={{ left: `${l.x}%`, top: `${l.y}%` }} aria-hidden="true">
+            {l.label}
+          </span>
+        ))}
+        {personalProjects.map((n) => (
+          <button key={n.id} type="button" className={`pm-node is-${n.status}${n.id === id ? " is-selected" : ""}`} aria-pressed={n.id === id} onClick={() => setId(n.id)}>
+            {n.id === id && <motion.span layoutId="pm-ring" className="pm-ring" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+            <span className="pm-num">{n.num}</span>
+            <span className="pm-name">{n.name}</span>
+            <span className="pm-role">{n.role}</span>
+            {/* Short label here so it never wraps in a narrow node; the panel shows the full one. */}
+            <span className={`status-pill is-${n.status}`}>{n.status === "built" ? "Built" : statusLabel[n.status]}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="pm-panel" aria-live="polite">
+        <AnimatePresence mode="wait" initial={false}>
           <motion.div
-            id={panelId}
-            className="proj-panel"
-            initial={reduce ? false : { height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={reduce ? undefined : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            key={p.id}
+            className="pm-detail"
+            initial={reduce ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: -10 }}
+            transition={{ duration: 0.28, ease }}
           >
-            <div className="proj-detail">
-              <dl className="proj-meta">
-                <div>
-                  <dt>Proves</dt>
-                  <dd>{p.proves}</dd>
-                </div>
-                <div>
-                  <dt>Connects</dt>
-                  <dd>{p.connects}</dd>
-                </div>
-              </dl>
+            <p className="pm-kicker">
+              {p.num} · {p.proves}
+            </p>
+            <h3 className="pm-title">
+              {p.name} <span className={`status-pill is-${p.status}`}>{statusLabel[p.status]}</span>
+            </h3>
+            <p className="pm-tagline">{p.tagline}</p>
+
+            {p.results ? (
+              <ul className="pm-results">
+                {p.results.map((m) => (
+                  <li key={m.label}>
+                    <b>{m.value}</b>
+                    <span>{m.label}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
               <div>
-                <p className="proj-label">{p.results ? "Results" : "Will publish"}</p>
-                {p.results ? (
-                  <ul className="proj-publishes">
-                    {p.results.map((m) => (
-                      <li key={m.label}>
-                        <b>{m.value}</b> {m.label}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <ul className="proj-publishes">
-                    {p.publishes.map((n) => (
-                      <li key={n}>{n}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              <div className="proj-foot">
-                <ul className="chips small">
-                  {p.stack.map((s) => (
-                    <li key={s}>{s}</li>
+                <p className="proj-label">Will publish</p>
+                <ul className="proj-publishes">
+                  {p.publishes?.map((n) => (
+                    <li key={n}>{n}</li>
                   ))}
                 </ul>
-                <div className="project-links">
-                  {p.caseStudy && (
-                    <a className="project-link" href={p.caseStudy} target="_blank" rel="noopener">
-                      <Icon name="external" /> Case study
-                    </a>
-                  )}
-                  {p.repo ? (
-                    <a className="project-link" href={p.repo} target="_blank" rel="noopener">
-                      <Icon name="github" /> Repository
-                    </a>
-                  ) : (
-                    <span className="project-soon">Repo opens when the build starts</span>
-                  )}
-                </div>
               </div>
+            )}
+
+            <p className="pm-connects">
+              <b>In the platform</b>
+              {p.connects}
+            </p>
+            <ul className="chips small">
+              {p.stack.map((s) => (
+                <li key={s}>{s}</li>
+              ))}
+            </ul>
+
+            <div className="pm-actions">
+              {hasStudy ? (
+                <button type="button" className="btn btn-primary" onClick={() => onOpen(p.id)} aria-haspopup="dialog">
+                  Read the case study <Icon name="arrow" />
+                </button>
+              ) : (
+                <span className="project-soon">Coming soon. Its case study lands with its first measured numbers.</span>
+              )}
+              {p.repo && (
+                <a className="project-link" href={p.repo} target="_blank" rel="noopener">
+                  <Icon name="github" /> Repository
+                </a>
+              )}
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </li>
+        </AnimatePresence>
+      </div>
+    </div>
   );
 }
 
@@ -118,7 +141,8 @@ function Builds() {
     <div className="builds">
       <div className="builds-head">
         <h3 className="subhead">Other builds</h3>
-        <div className="filters" role="group" aria-label="Filter builds by area">
+        {/* Filters only earn their space once there is more than one area to choose between. */}
+        <div className="filters" role="group" aria-label="Filter builds by area" hidden={filters.length < 3}>
           {filters.map((f) => (
             <button
               key={f.id}
@@ -169,7 +193,7 @@ function Builds() {
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
                 {href ? (
-                  <a className="build-card" href={href} target="_blank" rel="noopener" data-cursor={b.live ? "Open" : "Repo"}>
+                  <a className="build-card" href={href} target="_blank" rel="noopener">
                     {body}
                   </a>
                 ) : (
@@ -192,7 +216,9 @@ function Builds() {
 }
 
 export function Projects() {
-  const [openId, setOpenId] = useState<string | null>(personalProjects[0]?.id ?? null);
+  const [openId, open] = useCaseHash(caseIds, "projects");
+  const close = useCallback(() => open(null), [open]);
+  const study = projectCases.find((c) => c.id === openId);
 
   return (
     <section className="section" id="projects" aria-labelledby="projects-title">
@@ -208,8 +234,8 @@ export function Projects() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="section-lead">
-              A flagship platform of four connected systems, plus side builds I pick up along the way. Results show up here only once
-              they're measured.
+              One platform of four connected systems. Two are built and measured, and open as full case studies. Two are coming
+              soon. A number appears here only once it has been measured.
             </p>
           </Reveal>
         </header>
@@ -217,17 +243,19 @@ export function Projects() {
         <Reveal delay={0.1}>
           <div className="flagship-head">
             <h3 className="subhead">Flagship · one platform</h3>
-            <p>Model calls go through Switchboard; reports and alerts leave through Relay.</p>
+            <p className="pm-legend">
+              <span className="lg-built">Built</span>
+              <span className="lg-soon">Coming soon</span>
+              <span className="lg-wire">Planned connection</span>
+            </p>
           </div>
-          <ol className="proj-list">
-            {personalProjects.map((p) => (
-              <ProjectRow key={p.id} p={p} open={openId === p.id} onToggle={() => setOpenId((cur) => (cur === p.id ? null : p.id))} />
-            ))}
-          </ol>
+          <PlatformMap onOpen={open} />
         </Reveal>
 
         <Builds />
       </div>
+
+      <AnimatePresence>{study && <CaseModal key="modal" list={projectCases} study={study} onClose={close} onSelect={open} />}</AnimatePresence>
     </section>
   );
 }

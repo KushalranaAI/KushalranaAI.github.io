@@ -1,59 +1,41 @@
-import { motion, useReducedMotion } from "motion/react";
-import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
   delay?: number;
-  y?: number;
   className?: string;
 }
 
-/** Fades and lifts its children into view once, the first time they scroll on screen. */
-export function Reveal({ children, delay = 0, y = 28, className }: Props) {
-  const reduce = useReducedMotion();
-  if (reduce) return <div className={className}>{children}</div>;
+/**
+ * Fades and lifts its children in the first time they scroll on screen. Anything already on screen when the page
+ * loads is left alone, so the prerendered HTML never flickers. Plain CSS transition, no animation library.
+ */
+export function Reveal({ children, delay = 0, className }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const section = el.closest("section");
+    const offscreen = (node: Element) => node.getBoundingClientRect().top >= window.innerHeight;
+    if (!(section ? offscreen(section) : false) && !offscreen(el)) return;
+    el.classList.add("reveal-wait");
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        el.classList.remove("reveal-wait");
+        io.disconnect();
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <div ref={ref} className={`reveal${className ? ` ${className}` : ""}`} style={delay ? { transitionDelay: `${delay}s` } : undefined}>
       {children}
-    </motion.div>
-  );
-}
-
-/** Slides each character up out of a mask. Used for big headings. */
-export function SplitLine({
-  text,
-  className,
-  delay = 0,
-  play = true,
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-  play?: boolean;
-}) {
-  const reduce = useReducedMotion();
-  return (
-    <span className={`split ${className ?? ""}`}>
-      <span className="sr-only">{text}</span>
-      {[...text].map((ch, i) => (
-        <span className="split-mask" aria-hidden="true" key={i}>
-          <motion.span
-            className="split-char"
-            initial={reduce ? false : { y: "115%", rotate: 6 }}
-            animate={play ? { y: "0%", rotate: 0 } : undefined}
-            transition={{ duration: 0.9, delay: delay + i * 0.045, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {ch === " " ? " " : ch}
-          </motion.span>
-        </span>
-      ))}
-    </span>
+    </div>
   );
 }
 

@@ -57,7 +57,7 @@ export function About() {
               <ul className="cert-list">
                 {certs.map((c) => (
                   <li key={c.href}>
-                    <a href={c.href} target="_blank" rel="noopener" data-cursor="View">
+                    <a href={c.href} target="_blank" rel="noopener">
                       <img className="cert-logo" src={c.logo} alt="" width={22} height={22} loading="lazy" />
                       <span>{c.title}</span>
                       <Icon name="arrow-up-right" className="cert-arrow" />

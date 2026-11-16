@@ -13,6 +13,7 @@ const filled: Record<string, string> = {
 };
 
 const stroked: Record<string, string> = {
+  phone: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z",
   mail: "M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Zm0 .5 9 6 9-6",
   download: "M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14",
   arrow: "M5 12h14m-5-5 5 5-5 5",
