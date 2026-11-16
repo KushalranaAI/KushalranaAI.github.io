@@ -1,11 +1,11 @@
 import { AnimatePresence, motion, useScroll as useViewportScroll, useSpring } from "motion/react";
 import { useEffect, useState } from "react";
 import { nav, profile } from "../data/profile";
-import { useScroll } from "../hooks/useLenis";
+import { useScroll } from "../hooks/useScroll";
 import { useTheme } from "../hooks/useTheme";
 import { Icon } from "./Icon";
 
-export function Nav({ ready }: { ready: boolean }) {
+export function Nav() {
   const { scrollTo, lock, unlock } = useScroll();
   const { theme, toggle } = useTheme();
   const [active, setActive] = useState<string>("");
@@ -55,9 +55,6 @@ export function Nav({ ready }: { ready: boolean }) {
       <motion.div className="progress" style={{ scaleX: progress }} aria-hidden="true" />
       <motion.header
         className="nav-wrap"
-        initial={{ y: -80, opacity: 0 }}
-        animate={ready ? { y: 0, opacity: 1 } : undefined}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <nav className="nav" aria-label="Main">
           <a

@@ -46,6 +46,10 @@ export interface CaseStudy {
   decisions?: { title: string; chose: string; over?: string; why: string }[];
   /** Hard problems: what was seen, what was really wrong, what fixed it. */
   problems?: { title: string; symptom: string; cause: string; fix: string }[];
+  /** One square per measured run, grouped. Shows the misses as well as the hits. */
+  runs?: { caption: string; cells: { id: string; group: string; state: "hit" | "miss" | "partial"; note: string }[] };
+  /** What went wrong, what is unproven and what is not done. */
+  limits?: string[];
   stack: string[];
   links?: CaseLink[];
   diagram: Diagram;

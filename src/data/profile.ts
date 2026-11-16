@@ -7,6 +7,7 @@ export const profile = {
   title: "SDE II",
   location: "Noida, India",
   email: "kushalrana448@gmail.com",
+  phone: "+91 88516 18945",
   resume: "/Kushal_Rana_Resume.pdf",
   photo: "/assets/img/kushal.webp?v=2",
   headline: "I build AI systems, and the backends they run on.",

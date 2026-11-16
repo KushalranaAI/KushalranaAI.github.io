@@ -26,7 +26,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+  <!-- Fonts load without blocking the first paint; text shows in the system font until they arrive. -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" /></noscript>
 
   <!-- Applies the saved theme before first paint, so there's no flash. -->
   <script>
@@ -47,6 +50,7 @@
     "alumniOf": "I.K. Gujral Punjab Technical University",
     "url": "https://kushalranaai.github.io/",
     "email": "mailto:kushalrana448@gmail.com",
+    "telephone": "+91-8851618945",
     "sameAs": ["https://github.com/KushalranaAI", "https://www.linkedin.com/in/kushal-rana", "https://x.com/KushalranaAI", "https://kushalrana448.medium.com/", "https://www.youtube.com/@naaku-o2x"],
     "knowsAbout": ["Generative AI", "Agentic AI", "Retrieval-Augmented Generation", "Model Context Protocol", "Machine Learning", "Deep Learning", "LLM Fine-tuning", "LLMOps", "Distributed Systems", "Backend Engineering", "FastAPI", "System Design", "Low-level Design"]
   }

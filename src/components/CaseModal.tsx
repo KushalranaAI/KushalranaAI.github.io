@@ -1,11 +1,15 @@
 import { motion } from "motion/react";
-import { useEffect, useRef } from "react";
-import { cases, type CaseStudy } from "../data/cases";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import type { CaseStudy } from "../data/cases";
+import { useScroll } from "../hooks/useScroll";
 import { Diagram } from "./Diagram";
 import { Icon } from "./Icon";
 import { Rich } from "./Reveal";
 
 interface Props {
+  /** The set this study belongs to: drives the counter and previous / next. */
+  list: CaseStudy[];
   study: CaseStudy;
   onClose: () => void;
   onSelect: (id: string) => void;
@@ -29,13 +33,67 @@ function Story({ items, start }: { items: { label: string; body: string }[]; sta
   );
 }
 
+const glyph = { hit: "✓", miss: "✕", partial: "~" } as const;
+
+/** One square per measured run, so the misses are as visible as the hits. */
+function RunGrid({ runs }: { runs: NonNullable<CaseStudy["runs"]> }) {
+  const [active, setActive] = useState<string | null>(null);
+  const groups = [...new Set(runs.cells.map((c) => c.group))];
+  const cell = runs.cells.find((c) => c.id === active);
+  return (
+    <div className="modal-block">
+      <h3 className="modal-h">Every run</h3>
+      <div className="runs">
+        {groups.map((g) => (
+          <div className="runs-group" key={g}>
+            <div className="runs-cells">
+              {runs.cells
+                .filter((c) => c.group === g)
+                .map((c) => (
+                  <button
+                    key={c.id}
+                    type="button"
+                    className={`run is-${c.state}${active === c.id ? " is-active" : ""}`}
+                    aria-label={`${c.id}, ${c.group}: ${c.note}`}
+                    onPointerEnter={() => setActive(c.id)}
+                    onFocus={() => setActive(c.id)}
+                    onClick={() => setActive(c.id)}
+                  >
+                    {glyph[c.state]}
+                  </button>
+                ))}
+            </div>
+            <span>{g}</span>
+          </div>
+        ))}
+      </div>
+      <p className="runs-note" aria-live="polite">
+        {cell ? (
+          <>
+            <b>{cell.id}</b> · {cell.group} · {cell.note}
+          </>
+        ) : (
+          runs.caption
+        )}
+      </p>
+    </div>
+  );
+}
+
 /** Full case study in a slide-over panel. Esc closes, focus is trapped inside, and the page behind is locked. */
-export function CaseModal({ study, onClose, onSelect }: Props) {
+export function CaseModal({ list: cases, study, onClose, onSelect }: Props) {
+  const { lock, unlock } = useScroll();
   const panelRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const idx = cases.findIndex((c) => c.id === study.id);
   const prev = cases[(idx - 1 + cases.length) % cases.length]!;
   const next = cases[(idx + 1) % cases.length]!;
+
+  // Freeze the page behind the panel
+  useEffect(() => {
+    lock();
+    return unlock;
+  }, [lock, unlock]);
 
   // Focus handling: move focus in on open, trap Tab, restore on close.
   useEffect(() => {
@@ -80,7 +138,7 @@ export function CaseModal({ study, onClose, onSelect }: Props) {
   ];
   const result = { label: "Result", body: study.result };
 
-  return (
+  return createPortal(
     <motion.div
       className="modal-root"
       initial={{ opacity: 0 }}
@@ -117,7 +175,7 @@ export function CaseModal({ study, onClose, onSelect }: Props) {
           </div>
         </div>
 
-        <div className="modal-scroll" ref={scrollerRef} data-lenis-prevent>
+        <div className="modal-scroll" ref={scrollerRef}>
           <motion.div key={study.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
             <p className="case-tags">
               {study.tags.map((t) => (
@@ -166,7 +224,7 @@ export function CaseModal({ study, onClose, onSelect }: Props) {
 
             {study.problems && (
               <div className="modal-block">
-                <h3 className="modal-h">Hardest problem</h3>
+                <h3 className="modal-h">{study.problems.length > 1 ? "Hardest problems" : "Hardest problem"}</h3>
                 {study.problems.map((p) => (
                   <article className="problem" key={p.title}>
                     <h4>{p.title}</h4>
@@ -189,6 +247,21 @@ export function CaseModal({ study, onClose, onSelect }: Props) {
               </div>
             )}
 
+            {study.runs && <RunGrid runs={study.runs} />}
+
+            {study.limits && (
+              <div className="modal-block">
+                <h3 className="modal-h">What went wrong and what is still open</h3>
+                <ul className="limits">
+                  {study.limits.map((l) => (
+                    <li key={l}>
+                      <Rich text={l} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <Story items={[result]} start={head.length} />
 
             <ul className="chips">
@@ -207,15 +280,18 @@ export function CaseModal({ study, onClose, onSelect }: Props) {
               </div>
             )}
 
-            <button type="button" className="modal-next" onClick={() => onSelect(next.id)} data-cursor="Next">
-              <small>Next case study</small>
-              <span>
-                {next.title} <Icon name="arrow" />
-              </span>
-            </button>
+            {cases.length > 1 && (
+              <button type="button" className="modal-next" onClick={() => onSelect(next.id)}>
+                <small>Next case study</small>
+                <span>
+                  {next.title} <Icon name="arrow" />
+                </span>
+              </button>
+            )}
           </motion.div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }

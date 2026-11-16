@@ -1,33 +1,21 @@
 import { AnimatePresence } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { cases } from "../data/cases";
 import { roles } from "../data/experience";
-import { useScroll as useSmoothScroll } from "../hooks/useLenis";
+import { useCaseHash } from "../hooks/useCaseHash";
 import { CaseModal } from "./CaseModal";
 import { Icon } from "./Icon";
 import { Reveal } from "./Reveal";
+
+const caseIds = cases.map((c) => c.id);
 
 /**
  * Work and experience in one place: the Aviara Labs roles sit beside the systems built in them,
  * and earlier jobs follow as compact rows. Case studies open in a side panel.
  */
 export function Work() {
-  const [openId, setOpenId] = useState<string | null>(null);
-  const { lock, unlock } = useSmoothScroll();
-
-  const open = useCallback((id: string) => setOpenId(id), []);
-  const close = useCallback(() => setOpenId(null), []);
-
-  // Freeze the page behind the panel
-  useEffect(() => {
-    if (!openId) return;
-    lock();
-    document.documentElement.classList.add("modal-open");
-    return () => {
-      unlock();
-      document.documentElement.classList.remove("modal-open");
-    };
-  }, [openId, lock, unlock]);
+  const [openId, open] = useCaseHash(caseIds, "work");
+  const close = useCallback(() => open(null), [open]);
 
   const study = cases.find((c) => c.id === openId);
   const aviara = roles.filter((r) => r.company === "Aviara Labs");
@@ -75,8 +63,8 @@ export function Work() {
           <ol className="case-list" aria-label="Case studies">
             {cases.map((c, i) => (
               <li key={c.id}>
-                <Reveal delay={Math.min(i * 0.06, 0.2)} y={18}>
-                  <button type="button" className="case-row" onClick={() => open(c.id)} data-cursor="Open" aria-haspopup="dialog">
+                <Reveal delay={Math.min(i * 0.06, 0.2)}>
+                  <button type="button" className="case-row" onClick={() => open(c.id)} aria-haspopup="dialog">
                     <span className="case-row-num" aria-hidden="true">
                       {c.num}
                     </span>
@@ -106,7 +94,7 @@ export function Work() {
           <div className="earlier-roles">
             <p className="subhead">Before Aviara</p>
             {earlier.map((r) => (
-              <Reveal key={r.id} y={14}>
+              <Reveal key={r.id}>
                 <article className="role-row">
                   <div>
                     <h3>
@@ -126,7 +114,7 @@ export function Work() {
         )}
       </div>
 
-      <AnimatePresence>{study && <CaseModal key="modal" study={study} onClose={close} onSelect={open} />}</AnimatePresence>
+      <AnimatePresence>{study && <CaseModal key="modal" list={cases} study={study} onClose={close} onSelect={open} />}</AnimatePresence>
     </section>
   );
 }
