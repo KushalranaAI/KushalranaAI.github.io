@@ -22,6 +22,19 @@ export interface Pathway {
  */
 export const pathways: Pathway[] = [
   {
+    id: "backend",
+    title: "Backend from First Principles",
+    blurb:
+      "How servers actually work, from one HTTP request to a service you could run in production. Each idea starts with an everyday comparison and an animation you can step through, and every lesson adds a step to one project, a bookmarks API.",
+    stats: ["28 lessons", "147 animations", "AI tutor"],
+    stack: ["React", "TypeScript", "Node.js · Postgres · Redis"],
+    tags: ["systems"],
+    image: "/assets/img/projects/backend-first-principles.webp",
+    alt: "Backend from First Principles home page with an animated map of one request travelling from the client through the edge, API, cache and Postgres",
+    live: "https://kushalranaai.github.io/backend-from-first-principle/",
+    repo: "https://github.com/KushalranaAI/backend-from-first-principle",
+  },
+  {
     id: "ai-path",
     title: "AI Engineer Path",
     blurb:
